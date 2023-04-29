@@ -12,9 +12,9 @@ Rscript preprocessing/UKBB_*/MungeCredibleSets.R
 ```
 
 ## Run V2G
-Create the environment from the snakmake/envs/V2G.yml file
+Create the environment from the snakmake/envs/V2G.yaml file
 ```
-conda env create -f V2G.yml
+conda env create -f V2G.yaml
 ```
 Run snakemake after setting up the config file
 ```
