@@ -1,0 +1,374 @@
+import os
+import pandas as pd
+import subprocess
+import numpy as np
+
+VariantConfigTable=config["VariantTable"]
+variant_table = pd.read_table(VariantConfigTable, sep="\t", na_values="").fillna("None").set_index("Trait", drop=False)
+Traits=list(variant_table.index.values)
+##########################################################
+CellGroupsOfInterest=config["CellGroupsOfInterest"]
+##########################################################
+rule all:
+	input: 
+		combined_table=expand(os.path.join(config["OutDir"],"{trait}", "{trait}_cell2gene.txt"), trait=Traits),
+		variantInfo=expand(os.path.join(config["OutDir"],"{trait}", "Credibleset_gene_variant_info.tsv"), trait=Traits)
+##########################################################
+# define functions
+def getVariants(wildcards):
+    return(str(variant_table.loc[wildcards.trait,"fine_mapped_table"]))
+
+def getLeadVariantCol(wildcards):
+	return(str(variant_table.loc[wildcards.trait,"LeadVariantCol"]))
+
+def getVariantCol(wildcards):
+	return(str(variant_table.loc[wildcards.trait,"VariantCol"]))
+
+def getChrCol(wildcards):
+	return(str(variant_table.loc[wildcards.trait,"ChrCol"]))
+
+def getPosCol(wildcards):
+	return(str(variant_table.loc[wildcards.trait,"PosCol"]))
+
+def getPCol(wildcards):
+	return(str(variant_table.loc[wildcards.trait,"PCol"]))
+
+def getPIPCol(wildcards):
+	return(str(variant_table.loc[wildcards.trait,"PIPCol"]))
+
+def getSource(wildcards):
+	return(str(variant_table.loc[wildcards.trait,"Source"]))
+
+def getZeroIndexed(wildcards):
+	return(str(variant_table.loc[wildcards.trait, "ZeroIndexed"]))
+
+def getExcludeVariants(wildcards):
+	return(str(variant_table.loc[wildcards.trait, "ExcludeVariants"]))
+##########################################################
+rule MungeCredibleSet:
+	input:
+		fine_mapped_variants=getVariants,
+	params:
+		helper_functions=os.path.join(config["CodeDir"],"helper_functions.R"),
+		genes=config["MungeCredibleSet"]["Genes"],
+		promoters=config["MungeCredibleSet"]["Promoters"],
+		codeDir=config["CodeDir"],
+		outdir=os.path.join(config["OutDir"], "{trait}"),
+		indexed_0=getZeroIndexed, 
+		leadvariant_col=getLeadVariantCol,
+		variant_col=getVariantCol,
+		chr_col=getChrCol,
+		pos_col=getPosCol,
+		p_col=getPCol,
+		pip_col=getPIPCol,
+		source=getSource, 
+		excludeVariants=getExcludeVariants
+	output:
+		variant_list=os.path.join(config["OutDir"], "{trait}", "variant.list.txt"),
+		cs_list=os.path.join(config["OutDir"], "{trait}", "all.cs.txt")
+	resources:
+		mem_gb=16,
+		runtime_hr=3
+	shell:
+		"""
+			Rscript {params.codeDir}/CreateCS.R \
+				--helperFunctions {params.helper_functions} \
+				--fineMappedVariants {input.fine_mapped_variants} \
+				--genes {params.genes} \
+				--promoters {params.promoters} \
+				--trait {wildcards.trait} \
+				--outdir {params.outdir} \
+				--leadVariantCol {params.leadvariant_col} \
+				--variantCol {params.variant_col} \
+				--chrCol {params.chr_col} \
+				--positionCol {params.pos_col} \
+				--PCol {params.p_col} \
+				--PIPCol {params.pip_col} \
+				--Source {params.source} \
+				--zeroIndexed {params.indexed_0} \
+				--excludeVariants {params.excludeVariants}
+		"""
+
+rule create_locus_window:
+	input:
+		variant_list=os.path.join(config["OutDir"], "{trait}", "variant.list.txt"),
+		cs_list=os.path.join(config["OutDir"], "{trait}", "all.cs.txt")
+	params:
+		codeDir=config["CodeDir"],
+		outDir=os.path.join(config["OutDir"], "{trait}", "intermediate_files"),
+	output:
+		locus_window_table_bed=os.path.join(config["OutDir"], "{trait}","intermediate_files", "{trait}_gwas_table_base.bed"),
+		locus_window_table_txt=os.path.join(config["OutDir"], "{trait}","intermediate_files", "{trait}_gwas_table_base.txt"),
+	resources:
+		mem_gb=16,
+		runtime_hr=3
+	shell:
+		"""
+			Rscript {params.codeDir}/create_locus_window.R \
+				--cs {input.cs_list} \
+				--variants {input.variant_list} \
+				--outdir {params.outDir} \
+				--trait {wildcards.trait}
+		"""
+
+rule intersect_window_w_genes:
+	input:
+		locus_window_table=os.path.join(config["OutDir"], "{trait}","intermediate_files", "{trait}_gwas_table_base.bed"),
+	params:
+		chrom_sizes=config["hg19sizes"],
+		gene_TSS=config["MungeCredibleSet"]["Promoters"],
+		outDir=os.path.join(config["OutDir"], "{trait}", "intermediate_files"),
+	output:
+		gene_overlap_window=os.path.join(config["OutDir"], "{trait}","intermediate_files", "{trait}_gwas_table_base.sorted.gene_overlap.bed")
+	resources:
+		mem_gb=16,
+		runtime_hr=3
+	shell:
+		"""
+		set +o pipefail;
+		bedtools sort -i {input.locus_window_table} -g {params.chrom_sizes} > {params.outDir}/tmp.bed
+		bedtools sort -i {params.gene_TSS} -g {params.chrom_sizes} |bedtools intersect -sorted -wa -wb -a {params.outDir}/tmp.bed -b stdin -g {params.chrom_sizes} > {output.gene_overlap_window}
+		rm {params.outDir}/tmp.bed
+		"""
+
+rule merge_locus_window_w_genes:
+	input:
+		locus_window_table=os.path.join(config["OutDir"], "{trait}","intermediate_files", "{trait}_gwas_table_base.txt"),
+		gene_overlap_window=os.path.join(config["OutDir"], "{trait}","intermediate_files", "{trait}_gwas_table_base.sorted.gene_overlap.bed"),
+	params:
+		helper_functions=os.path.join(config["CodeDir"],"helper_functions.R"),
+		removeNonCoding=config["RemoveNonCoding"],
+		codeDir=config["CodeDir"],
+		outDir=os.path.join(config["OutDir"], "{trait}","intermediate_files"),
+	output:
+		gene_in_locus_window=os.path.join(config["OutDir"], "{trait}","intermediate_files", "{trait}_gwas_table_base_genes.txt")
+	resources:
+		mem_gb=16,
+		runtime_hr=3
+	shell:
+		"""
+		Rscript {params.codeDir}/merge_locus_window_w_genes.R \
+			--removeNonCoding {params.removeNonCoding} \
+			--helperFunctions {params.helper_functions} \
+			--LocusWindow {input.locus_window_table} \
+			--GenesOverlappingLocusWindows {input.gene_overlap_window} \
+			--Outdir {params.outDir} \
+			--trait {wildcards.trait}
+		"""
+
+rule intersectWithABC:
+	input:
+		variants=os.path.join(config["OutDir"], "{trait}", "variant.list.txt")
+	output:
+		sorted_variants= os.path.join(config["OutDir"], "{trait}", "intermediate_files", "Variants.sorted.bed"),
+		ABC_overlap=os.path.join(config["OutDir"], "{trait}", "ABCOverlapFull.tsv"), 
+	params:
+		hg19sizes=config["hg19sizes"],
+		header=config["intersectWithABC"]["header"],
+		abcPred=config["ABCPRED"]
+	resources:
+		mem_gb=16,
+		runtime_hr=3
+	shell:
+		"""
+		set +o pipefail;
+		csvtk cut -t -f chr,start,end,variant,PosteriorProb,Trait,CredibleSet {input.variants}| \
+  		sed 1d | \
+  		bedtools sort -i stdin -g {params.hg19sizes} > {output.sorted_variants}
+
+		cat {params.header} > {output.ABC_overlap}
+		zcat {params.abcPred} | sed 1d | bedtools sort -faidx {params.hg19sizes} -i stdin |bedtools intersect -sorted -wa -wb -a {output.sorted_variants} -b stdin -g {params.hg19sizes} >> {output.ABC_overlap}
+		"""
+
+rule intersectWithPeaks:
+	input:
+		sorted_variants=os.path.join(config["OutDir"], "{trait}", "intermediate_files", "Variants.sorted.bed"),
+	output:
+		PeaksOverlapFull=os.path.join(config["OutDir"], "{trait}", "PeaksOverlapFull.tsv"),
+		PeaksOverlapFull_Peaks=os.path.join(config["OutDir"], "{trait}", "PeaksOverlapFull.Peaks.tsv"), 
+	params:
+		ALLPeaks=config["ALLPEAKS"],
+		hg19sizes=config["hg19sizes"]
+	resources:
+		mem_gb=16,
+		runtime_hr=3
+	shell:
+		"""
+		set +o pipefail;
+		echo -e "chr\tstart\tend\tvariant\tPosteriorProb\tDisease\tCredibleSet\tCellType" > {output.PeaksOverlapFull}
+		for bed in {params.ALLPeaks}/*.bed; do
+        	bedtools intersect -sorted -wa -a {input.sorted_variants} -b ${{bed}} -g {params.hg19sizes} | awk -v cell=$(basename $bed .bed) '{{ print $0 "\t" cell }}' 
+		done | bedtools sort -i stdin  -g {params.hg19sizes} >> {output.PeaksOverlapFull}
+
+		echo -e "PeakChr\tPeakStart\tPeakEnd\tvariant\tCredibleSet\tEnhancerID\tCellType\tPosteriorProb" > {output.PeaksOverlapFull_Peaks}
+		for bed in {params.ALLPeaks}/*.bed; do
+			awk -F"\t" '{{ print $1"\t"$2"\t"$3"\t"$4 }}' ${{bed}} | bedtools intersect -sorted -wa -wb -a {input.sorted_variants} -b stdin -g {params.hg19sizes} | awk -v cell=$(basename ${{bed}} .bed) '{{ print $0 "\t" cell }}'
+		done | awk -F"\t" '{{ print $8"\t"$9"\t"$10"\t"$4"\t"$7"\t"$11"\t"$12"\t"$5 }}' |bedtools sort -i stdin  -g {params.hg19sizes} >> {output.PeaksOverlapFull_Peaks}
+		"""
+
+rule intersectWithCelltypes:
+	input:
+		ABCOverlap=os.path.join(config["OutDir"], "{trait}", "ABCOverlapFull.tsv"), 
+		PeakOverlapFull=os.path.join(config["OutDir"], "{trait}", "PeaksOverlapFull.tsv"),
+		Variants=os.path.join(config["OutDir"], "{trait}", "variant.list.txt"),
+		CSlist=os.path.join(config["OutDir"], "{trait}", "all.cs.txt"),
+	output:
+		ABC_overlap_ranked=os.path.join(config["OutDir"], "{trait}", "ABCOverlapFull.ranked.tsv"), 
+		ABC_overlap_celltype_summary=os.path.join(config["OutDir"], "{trait}", "ABCVariantOverlapSummary.tsv"),
+		ABC_TopGene_celltype_summary=os.path.join(config["OutDir"], "{trait}", "ABCTopGeneTableWithCellCategories.tsv"), 
+		CredibleSet_peak_overlap_summary=os.path.join(config["OutDir"], "{trait}", "CredibleSetPeakOverlapSummary.tsv")
+	params:
+		helper_functions=os.path.join(config["CodeDir"],"helper_functions.R"),
+		removeNonCoding=config["RemoveNonCoding"],
+		outDir=os.path.join(config["OutDir"], "{trait}"),
+		codeDir=config["CodeDir"],
+		PIP=config["intersectWithCelltypes"]["PIP"],
+		grouped_celltype_table=config["CelltypeTable"]
+	resources:
+		mem_gb=16,
+		runtime_hr=3
+	shell:
+		"""
+			Rscript {params.codeDir}/celltype.overlap.R \
+			--ABCOverlap {input.ABCOverlap} \
+			--PeakOverlap {input.PeakOverlapFull} \
+			--removeNonCoding {params.removeNonCoding} \
+			--variantList {input.Variants} \
+			--csList {input.CSlist} \
+			--grouped_celltype_table {params.grouped_celltype_table} \
+			--outDir {params.outDir} \
+			--PIP {params.PIP} \
+			--helperFunctions {params.helper_functions}
+		"""
+
+rule groupABCByCelltypes:
+	input: 
+		ABC_overlap_ranked=os.path.join(config["OutDir"], "{trait}", "ABCOverlapFull.ranked.tsv")
+	output:
+		cellCategory_grouped_ABC=os.path.join(config["OutDir"],"{trait}", "ABCOverlap.ranked.{cellGroup}.grouped.tsv")
+	params:
+		helper_functions=os.path.join(config["CodeDir"],"helper_functions.R"),
+		outDir=os.path.join(config["OutDir"], "{trait}"),
+		grouped_celltype_table=config["CelltypeTable"],
+		source=getSource,
+		codeDir=config["CodeDir"],
+		PIP=config["groupABCByCelltypes"]["PIP"]
+	resources:
+		mem_gb=16,
+		runtime_hr=3
+	shell:
+		"""
+		Rscript {params.codeDir}/group.ABC.result.R \
+			--outDir {params.outDir} \
+			--grouped_celltype_table {params.grouped_celltype_table} \
+			--cellGroup {wildcards.cellGroup} \
+			--ranked_ABC_table {input.ABC_overlap_ranked} \
+			--source {params.source} \
+			--PIP {params.PIP} \
+			--helperFunctions {params.helper_functions}
+		"""
+
+rule groupPeakOverlap:
+	input: 
+		CredibleSet_peak_overlap_summary=os.path.join(config["OutDir"], "{trait}", "CredibleSetPeakOverlapSummary.tsv"),
+		PeaksOverlapFull_Peaks=os.path.join(config["OutDir"],"{trait}", "PeaksOverlapFull.Peaks.tsv"),
+	output:
+		credibleset_peakinfo=os.path.join(config["OutDir"],"{trait}", "CredibleSetPeakOverlapSummary.with{cellGroup}peakinfo.tsv"), 
+		credibleset_peakinfo_cellgroup_only=os.path.join(config["OutDir"],"{trait}", "CredibleSetPeakOverlapSummary.withpeakinfo.only{cellGroup}.tsv"),
+	params:
+		helper_functions=os.path.join(config["CodeDir"],"helper_functions.R"),
+		outDir=os.path.join(config["OutDir"], "{trait}"),
+		grouped_celltype_tables=config["CelltypeTable"],
+		source=getSource,
+		codeDir=config["CodeDir"],
+		PIP=config["groupPeakOverlap"]["PIP"]
+	resources:
+		mem_gb=16,
+		runtime_hr=3
+	shell:
+		"""
+		Rscript {params.codeDir}/group.peakoverlap.result.R \
+			--outDir {params.outDir} \
+			--cs_peak_overlap_summary {input.CredibleSet_peak_overlap_summary} \
+			--PeaksOverlapFull_Peaks {input.PeaksOverlapFull_Peaks} \
+			--grouped_celltype_table {params.grouped_celltype_tables} \
+			--cellGroup {wildcards.cellGroup} \
+			--source {params.source} \
+			--PIP {params.PIP} \
+			--helperFunctions {params.helper_functions}
+		"""
+rule createABCtable:
+	input:
+		credibleset_peakinfo=expand(os.path.join(config["OutDir"],"{{trait}}", "CredibleSetPeakOverlapSummary.with{cellGroup}peakinfo.tsv"),cellGroup=CellGroupsOfInterest),
+		credibleset_peakinfo_cellgroup_only=expand(os.path.join(config["OutDir"],"{{trait}}", "CredibleSetPeakOverlapSummary.withpeakinfo.only{cellGroup}.tsv"),cellGroup=CellGroupsOfInterest),
+		cellCategory_grouped_ABC=expand(os.path.join(config["OutDir"],"{{trait}}", "ABCOverlap.ranked.{cellGroup}.grouped.tsv"),cellGroup=CellGroupsOfInterest)
+	params:
+		cellgroups=CellGroupsOfInterest,
+		file_path=os.path.join(config["OutDir"],"{trait}")
+	output:
+		ABC_overlapping_df=os.path.join(config["OutDir"],"{trait}", "peak_ABC_overlapping_table.tsv")
+	resources:
+		mem_gb=16,
+		runtime_hr=3
+	run:
+		df=pd.DataFrame(columns=["Cellgroup","Peaks","OnlyPeaks","ABC"])
+		for cellgroup in params.cellgroups:
+			df.loc[len(df.index)]=[cellgroup, os.path.join(params.file_path,"CredibleSetPeakOverlapSummary.with" +cellgroup+"peakinfo.tsv"), os.path.join(params.file_path,"CredibleSetPeakOverlapSummary.withpeakinfo.only"+cellgroup+".tsv"), os.path.join(params.file_path,"ABCOverlap.ranked."+cellgroup+".grouped.tsv")]
+		df.to_csv(output.ABC_overlapping_df, index=False, sep="\t")
+
+
+rule combineOutputTables:
+	input:
+		base_df=os.path.join(config["OutDir"], "{trait}","intermediate_files", "{trait}_gwas_table_base_genes.txt"),
+		ABC_overlapping_df=os.path.join(config["OutDir"],"{trait}", "peak_ABC_overlapping_table.tsv"),
+		UBQ_genes=config["UbiquitouslyExpressedGenes"],
+		LipidBloodAssociationTable=config["LipidBloodAssociationTable"],
+	params:
+		Cellgroups=",".join(config["CellGroupsOfInterest"]),
+		outDir=os.path.join(config["OutDir"],"{trait}"),
+		source=getSource,
+		codeDir=config["CodeDir"]
+	output:
+		combined_table=os.path.join(config["OutDir"],"{trait}", "{trait}_cell2gene.txt")
+	resources:
+		mem_gb=16,
+		runtime_hr=3
+	shell:
+		"""
+			Rscript {params.codeDir}/combine_tables.R \
+				--CSbase_df {input.base_df} \
+				--ABCPeak_overlapping_table {input.ABC_overlapping_df} \
+				--UBQ_genes {input.UBQ_genes} \
+				--LipidBloodAssociationTable {input.LipidBloodAssociationTable} \
+				--Cellgroups {params.Cellgroups} \
+				--Source {params.source} \
+				--OutDir {params.outDir} \
+				--trait {wildcards.trait}
+		"""
+
+rule getVariantInfo:
+	input:
+		combined_table=os.path.join(config["OutDir"],"{trait}", "{trait}_cell2gene.txt"),
+		variant_list=os.path.join(config["OutDir"], "{trait}", "variant.list.txt"),
+		ABC_overlap=os.path.join(config["OutDir"], "{trait}", "ABCOverlapFull.tsv"),
+		PeaksOverlapFull=os.path.join(config["OutDir"], "{trait}", "PeaksOverlapFull.tsv"),
+	params:
+		cellgroups=",".join(config["CellGroupsOfInterest"]),
+		outDir=os.path.join(config["OutDir"],"{trait}"),
+		codeDir=config["CodeDir"]
+	output:
+		variantInfo=os.path.join(config["OutDir"],"{trait}", "Credibleset_gene_variant_info.tsv")
+	resources:
+		mem_gb=16,
+		runtime_hr=3
+	shell:
+		"""
+			Rscript {params.codeDir}/get_credible_set_variants_info.R \
+				--CS2Gene {input.combined_table} \
+				--variantList {input.variant_list} \
+				--peakOverlap {input.PeaksOverlapFull} \
+				--ABCOverlap {input.ABC_overlap} \
+				--Cellgroups {params.cellgroups} \
+				--OutDir {params.outDir} \
+				--trait {wildcards.trait}
+		"""

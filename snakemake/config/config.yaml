@@ -1,0 +1,31 @@
+VariantTable: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/snakemake/config/variant_table.tsv"
+PathToVariants: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/input"
+CellGroupsOfInterest: ["EC"]
+OutDir: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/output"
+CodeDir: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/snakemake/workflow/scripts"
+hg19sizes: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/resources/hg19_chr_sizes"
+RemoveNonCoding: TRUE
+
+MungeCredibleSet:
+        Helper_functions: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/snakemake/workflow/scripts/helper_functions.R"
+        Genes: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/resources/RefSeqCurated.170308.bed.CollapsedGeneBounds.bed"
+        Promoters: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/resources/RefSeqCurated.170308.bed.CollapsedGeneBounds.TSS500bp.bed"
+
+UbiquitouslyExpressedGenes: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/resources/UbiquitouslyExpressedGenes.txt"
+ABCPRED: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/resources/size_sorted_CombinedPredictions.AvgHiC.ABC0.015.minus150.txt.gz"
+ALLPEAKS: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/resources/EnhancerList.minus150/"
+CelltypeTable: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/resources/grouped_celltype_table.txt"
+
+LipidBloodAssociationTable: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/resources/lipid.level.csv"
+
+intersectWithABC:
+  header: "/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/resources/ABC_overlap.header"
+
+intersectWithCelltypes:
+        PIP: 0
+
+groupABCByCelltypes:
+        PIP: 0
+
+groupPeakOverlap:
+        PIP: 0

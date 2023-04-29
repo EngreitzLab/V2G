@@ -1,0 +1,6 @@
+use-conda: True 
+cluster: "sbatch --parsable -p engreitz,owners --ntasks 1 --cpus-per-task {threads} --mem {resources.mem_mb} --time {resources.runtime_min}:00"
+cluster-cancel: scancel
+default-resources: "runtime_min=240"
+jobs: 100
+rerun-triggers: mtime
