@@ -1,0 +1,257 @@
+﻿rsID,MarkerName,Gene_name,locus,UKBB PheWAS Diseases,UKBB PheWAS Continuous traits
+rs2843152,1:2245570_C_G,SKI,1,,Alkaline phosphatase|Aspartate aminotransferase|Triglycerides
+rs7413494,1:2985885_C_G,PRDM16,2,,
+rs2493298,1:3325912_A_C,PRDM16,3,Hypertension,DBP|SBP
+rs79598313,1:27284913_C_T,C1orf172,4,Gout|Hypercholesterolemia,Alanine aminotransferase|Alkaline phosphatase|Apolipoprotein A|Apolipoprotein B|C-reactive protein|Cholesterol|Creatinine|Gamma glutamyltransferase|HDL-cholesterol|IGF-1|LDL-direct|SBP|SHBG|Testosterone|Total bilirubin|Triglycerides|Urate
+rs61776719,1:38461319_A_C,FHL3,5,,DBP|SBP
+rs34232196,1:55489542_C_T,BSND,6,Hypercholesterolemia,Apolipoprotein B|Cholesterol|LDL-direct
+rs11591147,1:55505647_G_T,PCSK9,6,Hypercholesterolemia,Apolipoprotein A|Apolipoprotein B|Cholesterol|LDL-direct
+rs472495,1:55521313_G_T,PCSK9,6,Hypercholesterolemia,Apolipoprotein B|Cholesterol|LDL-direct
+rs11206803,1:56877509_C_T,PPAP2B,7,,
+rs56170783,1:57016131_A_C,PPAP2B,7,,BMI
+rs71646019,1:59433354_C_T,LOC100131060,8,,
+rs12740374,1:109817590_G_T,CELSR2,9,Hypercholesterolemia,Albumin|Apolipoprotein A|Apolipoprotein B|C-reactive protein|Cholesterol|Creatinine|Gamma glutamyltransferase|HDL-cholesterol|IGF-1|LDL-direct|Total protein|Triglycerides
+rs1230666,1:114173410_A_G,MAGI3,10,Type 2 diabetes|Hyperthyroidism|Hypothyroidism|Rheumatoid arthritis,
+rs61797068,1:115902514_C_G,BAI3,11,,
+rs67807996,1:149995265_A_G,OTUD7B,12,Chronic obstructive pulmonary disease,
+rs11585169,1:150572037_A_T,MCL1,12,,Aspartate aminotransferase|Glucose|SBP|Urate
+rs6686750,1:154419843_A_G,IL6R,13,,Albumin|Alkaline phosphatase|Apolipoprotein A|C-reactive protein|SHBG
+rs61806987,1:169314833_A_G,NME7,14,,Glucose|HbA1c
+rs60154123,1:210468999_C_T,HHAT,15,Hypercholesterolemia,
+rs17163363,1:222828704_C_T,MIA3,16,Heart Failure|Hypercholesterolemia,Glucose
+rs16986953,2:19942473_A_G,FLJ12334,17,,HbA1c
+rs515135,2:21286057_C_T,APOB,18,Hypercholesterolemia,Alkaline phosphatase|Apolipoprotein B|Cholesterol|LDL-direct|Triglycerides
+rs4245791,2:44074431_C_T,ABCG8,19,Cholelithiasis or Gallstones|Hypercholesterolemia,Alanine aminotransferase|Apolipoprotein B|Aspartate aminotransferase|Cholesterol|LDL-direct|Triglycerides
+rs76866386,2:44075483_C_T,ABCG8,19,Cholelithiasis or Gallstones|Hypercholesterolemia|Pancreatitis,Alanine aminotransferase|Apolipoprotein B|Aspartate aminotransferase|Cholesterol|LDL-direct
+rs582384,2:45896437_A_C,PRKCE,20,,Cystatin C
+rs243071,2:60619028_A_G,MIR4432,21,Type 2 diabetes,
+rs10176176,2:85762048_A_T,LOC100630918,22,Prostate cancer,
+rs114192718,2:128785663_C_T,SAP130,23,,
+rs4662330,2:144186475_C_T,ARHGAP15,24,,
+rs6740731,2:145270592_A_G,ZEB2,25,,
+rs10928241,2:145831428_C_T,DKFZp686O1327,25,,DBP|SBP
+rs35611688,2:148377860_C_T,ACVR2A,26,,Creatinine|Cystatin C|Urate|Urea
+rs10930115,2:164930382_A_T,FIGN,27,Hypertension,SBP
+rs148812085,2:203877233_C_T,NBEAL1,28,Osteoarthritis,Alkaline phosphatase|Apolipoprotein B|Cholesterol|Cystatin C|IGF-1|LDL-direct
+rs1250247,2:216299629_C_G,FN1,29,,LDL-direct|SBP
+rs2161967,2:218680529_G_T,TNS1,30,,DBP|SBP
+rs952227,2:227062080_A_G,IRS1,31,Type 2 diabetes|Hypercholesterolemia,Alanine aminotransferase|Albumin|Apolipoprotein A|Aspartate aminotransferase|Gamma glutamyltransferase|HDL-cholesterol|SBP|SHBG|Triglycerides
+rs4140748,2:230005505_A_G,PID1,32,,
+rs283485,2:233645691_A_G,GIGYF2,33,,Albumin|Calcium|Creatinine|Cystatin C|Gamma glutamyltransferase
+rs34991912,3:14926351_C_T,FGD5,34,Hypertension,DBP|SBP
+rs34759087,3:49162284_C_T,LAMB2,35,,BMI|DBP|SBP
+rs77347777,3:52848207_C_T,ITIH4,36,,
+rs17843797,3:124453022_G_T,UMPS,37,,Cystatin C
+rs34330586,3:135800409_A_T,PPP2R3A,38,Hypercholesterolemia|Hypertension,Alanine aminotransferase|Alkaline phosphatase|Apolipoprotein A|BMI|C-reactive protein|Gamma glutamyltransferase|HDL-cholesterol|IGF-1|LDL-direct|SHBG|Total bilirubin|Total protein|Triglycerides|Urea
+rs185244,3:138092889_C_T,MRAS,39,Hypertension,BMI|HbA1c
+rs357494,3:153937753_A_G,ARHGEF26,40,,Glucose|Urate
+rs4266144,3:156852592_C_G,LOC339894,41,,HbA1c
+rs34229028,3:172117455_A_AC,FNDC3B,42,,IGF-1
+rs17083333,4:54572066_G_T,LNX1,43,,
+rs781663,4:57781754_A_G,REST,44,,
+rs12500824,4:77416627_A_G,SHROOM3,45,Hypertension,Alanine aminotransferase|Albumin|Alkaline phosphatase|Aspartate aminotransferase|Creatinine|Cystatin C|Urea
+rs10857147,4:81181072_A_T,FGF5,46,Hypercholesterolemia|Hypertension,Apolipoprotein B|Cholesterol|Creatinine|Cystatin C|DBP|SBP|Urate
+rs36002015,4:82625720_G_GT,RASGEF1B,47,,
+rs7678555,4:120909501_A_C,MAD2L1,48,,
+rs13124853,4:146784774_A_G,ZNF827,49,,Alanine aminotransferase|Aspartate aminotransferase|Gamma glutamyltransferase|SBP
+rs13120678,4:148273397_A_G,EDNRA,50,,Glucose|Oestradiol|Vitamin D
+rs6841581,4:148401190_A_G,EDNRA,50,,SBP
+rs7440763,4:156433520_G_T,MAP9,51,Hypertension,DBP|SBP
+rs3796587,4:156638073_C_G,GUCY1A3,51,Hypercholesterolemia|Hypertension,DBP|SBP
+rs869396,4:169688000_A_C,PALLD,52,,SBP
+rs17263917,5:9552338_A_G,SNORD123,53,,
+rs4074793,5:52193125_A_G,ITGA1,54,Hypercholesterolemia,Alanine aminotransferase|Albumin|Alkaline phosphatase|C-reactive protein|Gamma glutamyltransferase
+rs62362364,5:55441571_C_G,ANKRD55,55,,
+rs3936510,5:55860866_G_T,MAP3K1,56,Type 2 diabetes|Hypercholesterolemia|Hypertension,Alanine aminotransferase|Alkaline phosphatase|Apolipoprotein A|Apolipoprotein B|Gamma glutamyltransferase|HDL-cholesterol|LDL-direct|SBP|SHBG|Triglycerides|Urate
+rs12916,5:74656539_C_T,HMGCR,57,Hypercholesterolemia,Apolipoprotein B|BMI|Cholesterol|HbA1c|LDL-direct|Triglycerides|Vitamin D
+rs112949822,5:108085190_A_G,FER,58,,
+rs13169691,5:118448279_C_T,DMXL1,59,,
+rs4345341,5:121278751_A_T,SRFBP1,60,,
+rs6883598,5:127926190_A_C,FBN2,61,Hypertension,DBP|SBP
+rs10477741,5:131795310_G_T,C5orf56,62,Asthma,
+rs249760,5:141915692_C_T,FGF1,63,,Glucose|Oestradiol
+rs3776307,5:142494165_A_G,ARHGAP26,64,,
+rs72836800,6:1617327_C_T,FOXC1,65,,
+rs9349379,6:12903957_A_G,PHACTR1,66,Migraine,SBP
+rs6909752,6:22612629_A_G,HDGFL1,67,,
+rs9266631,6:31346898_A_G,MICA,68,Asthma|Type 2 diabetes|Hypercholesterolemia|Psoriasis|Rheumatoid arthritis,C-reactive protein|HbA1c|Rheumatoid factor|SHBG|Total bilirubin|Total protein|Triglycerides
+rs9469899,6:34793124_A_G,UHRF1BP1,69,Hypertension|Hypothyroidism,Apolipoprotein A|BMI|Cystatin C|DBP|HDL-cholesterol
+rs733701,6:39171862_C_T,KCNK5,70,,
+rs1034246,6:43068370_G_T,PTK7,71,,
+rs6905288,6:43758873_A_G,VEGFA,72,Hypercholesterolemia|Hypertension,Alanine aminotransferase|Apolipoprotein A|Aspartate aminotransferase|Cystatin C|DBP|Glucose|HDL-cholesterol|IGF-1|SHBG|Triglycerides
+rs11752218,6:57145562_C_T,PRIM2,73,,
+rs9361867,6:82595959_C_T,FAM46A,74,,
+rs2983896,6:97029871_A_G,FHL5,75,Hypertension|Migraine,DBP|SBP|Triglycerides
+rs35510806,6:126678331_T_TA,CENPW,76,,Apolipoprotein B|C-reactive protein|Gamma glutamyltransferase|HDL-cholesterol|IGF-1|LDL-direct|Phosphate|Total bilirubin|Triglycerides
+rs6919211,6:133999868_C_G,MGC34034,77,,
+rs2327426,6:134202690_C_T,TCF21,77,Hypertension,Creatinine|Urea
+rs2492304,6:134378151_A_T,SLC2A12,78,,
+rs17080093,6:150997440_C_T,PLEKHG1,79,Hypertension,DBP|SBP
+rs6932293,6:160535878_C_T,SLC22A1,80,Hypercholesterolemia,Apolipoprotein B|Cholesterol|Glucose|LDL-direct|Lipoprotein A|Vitamin D
+rs56195640,6:160720747_A_G,SLC22A2,80,,Lipoprotein A
+rs10455872,6:161010118_A_G,LPA,80,Aortic valve disease|Bradyarrhythmia general inclusive definition|Hypercholesterolemia|Hypertension|Peripheral vascular disease,Albumin|Apolipoprotein B|Cholesterol|Creatinine|HbA1c|LDL-direct|Lipoprotein A|Triglycerides
+rs73596816,6:161017363_A_G,LPA,80,Hypercholesterolemia,Apolipoprotein B|Cholesterol|LDL-direct|Lipoprotein A
+rs79018195,6:161024291_C_T,LPA,80,,Lipoprotein A
+rs192425087,6:161032250_C_T,LPA,80,Hypercholesterolemia,Cholesterol|LDL-direct|Lipoprotein A
+rs1998043,6:161097871_A_G,LPA,80,,Cholesterol|HDL-cholesterol|LDL-direct|Lipoprotein A|Triglycerides
+rs28867400,6:161104918_A_G,LPA,80,Hypercholesterolemia,Apolipoprotein B|Cholesterol|LDL-direct|Lipoprotein A
+rs186696265,6:161111700_C_T,PLG,80,Hypercholesterolemia,Apolipoprotein B|Cholesterol|LDL-direct|Lipoprotein A|Triglycerides
+rs184278183,6:161177756_C_T,PLG,80,Hypercholesterolemia,Cholesterol|LDL-direct|Lipoprotein A
+rs62435159,7:1911281_A_G,MAD1L1,81,Type 2 diabetes,BMI|Glucose|HbA1c
+rs10951983,7:6446027_A_G,RAC1,82,Cholelithiasis or Gallstones,Apolipoprotein A|HDL-cholesterol
+rs2107595,7:19049388_A_G,HDAC9,83,Hypercholesterolemia|Hypertension,Glucose|HbA1c|SBP
+rs10486389,7:20300416_A_G,MACC1,84,,
+rs2215614,7:35277093_A_C,TBX20,85,,
+rs2107732,7:45077978_A_G,CCM2,86,Hypertension,DBP|Vitamin D
+rs12112877,7:106941324_C_T,COG5,87,Hypercholesterolemia,Alkaline phosphatase|Calcium|Cystatin C
+rs13222797,7:117100046_G_T,CFTR,88,,
+rs11556924,7:129663496_C_T,ZC3HC1,89,Hypercholesterolemia|Hypertension,Creatinine|Cystatin C|DBP|SHBG
+rs756142636,7:139760540_T_TCCCTGCTCTC,PARP12,90,,
+rs3918226,7:150690176_C_T,NOS3,91,Allergic rhinitis|Hypercholesterolemia|Hypertension,Creatinine|DBP|SBP
+rs4646249,8:18260431_G_T,NAT2,92,Hypercholesterolemia,Albumin|Alkaline phosphatase|Calcium|Cholesterol|IGF-1|LDL-direct|Triglycerides
+rs268,8:19813529_A_G,LPL,93,Hypercholesterolemia,Apolipoprotein A|Apolipoprotein B|HDL-cholesterol|LDL-direct|Triglycerides
+rs894211,8:19865747_C_T,LPL,93,Hypercholesterolemia,Apolipoprotein A|Apolipoprotein B|Aspartate aminotransferase|HDL-cholesterol|LDL-direct|Triglycerides
+rs66778572,8:19916120_A_G,SLC18A1,93,Hypercholesterolemia,Apolipoprotein A|HDL-cholesterol|Triglycerides
+rs56408342,8:22048490_A_G,BMP1,94,,
+rs1510758,8:25061807_A_G,DOCK5,95,,Glucose|Vitamin D
+rs34917849,8:95278307_C_G,GEM,96,,SBP
+rs2001846,8:126478450_C_T,TRIB1,97,Hypercholesterolemia,Alanine aminotransferase|Albumin|Alkaline phosphatase|Apolipoprotein B|Aspartate aminotransferase|BMI|C-reactive protein|Cholesterol|Creatinine|Cystatin C|Gamma glutamyltransferase|HDL-cholesterol|HbA1c|LDL-direct|Triglycerides|Vitamin D
+rs10961206,9:13724051_A_T,C9orf146,98,,
+rs10811183,9:19436055_A_G,ACER2,99,,Cholesterol|Glucose|HDL-cholesterol|LDL-direct
+rs11523031,9:21843842_A_G,MTAP,100,,Glucose
+rs76959412,9:22011083_C_G,CDKN2B-AS1,100,,
+rs2891168,9:22098619_A_G,CDKN2B-AS1,100,Type 2 diabetes|Glaucoma|Heart Failure|Hypercholesterolemia|Peripheral vascular disease,Apolipoprotein B|Creatinine
+rs6475608,9:22101702_C_T,CDKN2B-AS1,100,,
+rs1967604,9:110530324_A_G,KLF4,101,,HbA1c
+rs41312891,9:123726749_G_GCAAA,C5,102,,
+rs885150,9:124420173_C_T,DAB2IP,102,,
+rs651007,9:136153875_C_T,ABO,103,Hypercholesterolemia|Venous thromboembolism,Alanine aminotransferase|Alkaline phosphatase|Apolipoprotein A|Apolipoprotein B|Aspartate aminotransferase|C-reactive protein|Cholesterol|Creatinine|DBP|Gamma glutamyltransferase|Glucose|HDL-cholesterol|HbA1c|LDL-direct|Total bilirubin|Total protein|Triglycerides|Urea
+rs17566555,10:12275947_A_G,CDC123,104,,
+rs9337951,10:30317073_A_G,KIAA1462,105,,Oestradiol
+rs1870634,10:44480811_G_T,LOC283033,106,,
+rs2457480,10:44740010_A_G,CXCL12,106,,
+rs494207,10:44741256_A_G,CXCL12,106,,Glucose|HbA1c
+rs17680741,10:82251514_C_T,TSPAN14,107,,
+rs1051338,10:91007360_G_T,LIPA,108,,Alkaline phosphatase|C-reactive protein
+rs55753709,10:96029170_C_T,PLCE1,109,Hypertension,DBP|IGF-1|SBP
+rs884811,10:99923763_C_G,C10orf28,110,,BMI
+rs77787671,10:104776205_C_T,CNNM2,111,Hypertension,BMI|DBP|HbA1c|SBP
+rs2067831,10:105643223_C_G,OBFC1,112,,SBP
+rs2672592,10:124230750_G_T,HTRA1,113,,
+rs11601507,11:5701074_A_C,TRIM5,114,Hypercholesterolemia,Alanine aminotransferase|Alkaline phosphatase|Apolipoprotein A|Apolipoprotein B|Aspartate aminotransferase|Cholesterol|HDL-cholesterol|LDL-direct|SHBG|Total bilirubin
+rs4537761,11:9323353_C_T,TMEM41B,115,,
+rs360153,11:9762274_C_T,SWAP70,115,Hypertension,DBP|HbA1c|SBP|Total protein
+rs11316597,11:13295751_A_AT,ARNTL,116,Hypertension,BMI|C-reactive protein|DBP|SBP|SHBG|Total bilirubin
+rs7118294,11:32380521_C_T,WT1,117,Uterine fibroids,
+rs2306363,11:65405600_G_T,SIPA1,118,Hypertension,Apolipoprotein A|DBP|HDL-cholesterol|SBP|SHBG|Triglycerides|Urate
+rs584961,11:75277628_A_G,SERPINH1,119,,
+rs633185,11:100593538_C_G,ARHGAP42,120,Hypercholesterolemia|Hypertension,DBP|SBP
+rs1892971,11:102795606_A_G,MMP13,121,,
+rs2839812,11:103673294_A_T,MIR4693,122,,
+rs10488763,11:110244360_A_T,FDX1,123,,
+rs964184,11:116648917_C_G,ZNF259,124,Hypercholesterolemia,Apolipoprotein B|Aspartate aminotransferase|Cholesterol|Creatinine|HDL-cholesterol|HbA1c|LDL-direct|Total bilirubin|Triglycerides
+rs1177562,11:118949331_C_T,VPS11,125,,Alanine aminotransferase|Albumin|Apolipoprotein A|BMI|Gamma glutamyltransferase|HDL-cholesterol|Total protein
+rs4938809,11:120363937_C_T,ARHGEF12,126,,IGF-1
+rs10790800,11:126262638_A_G,ST3GAL4,127,,Alkaline phosphatase
+rs72447384,12:7178440_T_TATTTA,C1S,128,,Gamma glutamyltransferase
+rs10841443,12:20220033_C_G,LOC100506393,129,Hypertension,DBP
+rs75160195,12:54521594_C_T,LOC400043,130,,
+rs2681472,12:90008959_A_G,ATP2B1,131,Hypertension,DBP|HbA1c|SBP
+rs11107903,12:95507971_A_G,FGD6,132,,
+rs10774625,12:111910219_A_G,ATXN2,133,Hypertension|Hyperthyroidism|Hypothyroidism|Psoriasis,Alanine aminotransferase|Albumin|Alkaline phosphatase|Apolipoprotein A|Apolipoprotein B|Aspartate aminotransferase|Cholesterol|Creatinine|Cystatin C|DBP|Glucose|HDL-cholesterol|HbA1c|LDL-direct|Oestradiol|Phosphate|SBP|Total bilirubin|Total protein|Urate|Vitamin D
+rs34606058,12:115353368_C_T,TBX3,134,,DBP
+rs2244608,12:121416988_A_G,HNF1A,135,Cholelithiasis or Gallstones|Type 2 diabetes|Hypercholesterolemia,Alkaline phosphatase|Apolipoprotein A|Apolipoprotein B|C-reactive protein|Cholesterol|Cystatin C|Gamma glutamyltransferase|IGF-1|LDL-direct|SHBG|Urate|Urea|Vitamin D
+rs7133378,12:124409502_A_G,DNAH10,136,,Apolipoprotein A|Creatinine|HDL-cholesterol|SHBG|Triglycerides
+rs7485656,12:125315647_A_G,SCARB1,137,Hypercholesterolemia,Apolipoprotein B|Cholesterol|Cystatin C|LDL-direct|Oestradiol|Triglycerides|Vitamin D
+rs7296737,12:125336956_C_T,SCARB1,137,Hypercholesterolemia,Aspartate aminotransferase
+rs17086617,13:28962686_C_T,FLT1,138,,
+rs7991314,13:33126074_C_T,N4BP2L2,139,,BMI|Glucose|HbA1c
+rs8000794,13:99434810_C_G,DOCK9,140,,
+rs11617955,13:110818102_A_T,COL4A1,141,,DBP
+rs3783113,13:110834746_C_T,COL4A1,141,,DBP
+rs11619113,13:110918660_C_G,COL4A1,141,,
+rs4773141,13:110954353_C_G,COL4A1,142,,DBP
+rs9515203,13:111049623_C_T,COL4A2,143,,HbA1c
+rs7333991,13:111108436_C_T,COL4A2,143,,Alkaline phosphatase
+rs4907571,13:113618496_C_T,MCF2L-AS1,144,,SBP
+rs10131894,14:75446879_C_G,EIF2B2,145,,Alkaline phosphatase|IGF-1
+rs112635299,14:94838142_G_T,SERPINA1,146,Cholelithiasis or Gallstones|Enlarged prostate|Osteoarthritis|Pancreatitis,Alanine aminotransferase|Albumin|Alkaline phosphatase|Aspartate aminotransferase|BMI|C-reactive protein|Calcium|Cystatin C|DBP|Gamma glutamyltransferase|IGF-1|SBP|SHBG|Testosterone|Total protein|Urea
+rs36033161,14:100123487_C_T,HHIPL1,147,,
+rs588136,15:58730498_C_T,LIPC,148,Hypercholesterolemia,Alanine aminotransferase|Alkaline phosphatase|Apolipoprotein A|Apolipoprotein B|Aspartate aminotransferase|Cholesterol|HDL-cholesterol|LDL-direct|Triglycerides|Vitamin D
+rs56062135,15:67455630_C_T,SMAD3,149,Allergic rhinitis|Asthma,IGF-1
+rs112238647,15:79051705_C_T,ADAMTS7,150,,DBP|Total protein
+rs7177201,15:79065380_C_T,ADAMTS7,150,,Creatinine|Cystatin C|DBP
+rs7173743,15:79141784_C_T,MORF4L1,150,,Aspartate aminotransferase
+rs2683260,15:81385552_G_T,C15orf26,151,,HbA1c
+rs1807214,15:89565257_A_C,ABHD2,152,,Creatinine|Glucose|Oestradiol
+rs7183988,15:91428589_G_T,FES,153,Hypercholesterolemia|Hypertension,Alanine aminotransferase|DBP|SBP
+rs17581137,15:96146414_A_C,LOC145820,154,,
+rs12691049,16:15909513_A_C,MYH11,155,,
+rs12446515,16:56987015_C_T,CETP,156,Hypercholesterolemia,Apolipoprotein A|Apolipoprotein B|Aspartate aminotransferase|Cholesterol|HDL-cholesterol|LDL-direct|Triglycerides
+rs12445401,16:72148419_A_G,DHX38,157,Hypercholesterolemia,Albumin|Apolipoprotein B|Aspartate aminotransferase|Cholesterol|Gamma glutamyltransferase|Glucose|HbA1c|LDL-direct|Triglycerides|Vitamin D
+rs8046696,16:75442143_G_T,CFDP1,158,Aortic valve disease|Hypertension,DBP|SBP
+rs10493891,16:81510742_C_T,CMIP,159,Hypertension,DBP|SBP
+rs7189462,16:81907867_G_T,PLCG2,160,,C-reactive protein
+rs7500448,16:83045790_A_G,CDH13,161,,DBP|SBP
+rs4790881,17:2068932_A_C,SMG6,162,,Albumin|Alkaline phosphatase|Apolipoprotein A|Calcium|Total protein
+rs12936927,17:17726965_C_T,SREBF1,163,,Creatinine|Glucose|IGF-1|Phosphate|SHBG|Vitamin D
+rs11080107,17:27938424_C_T,ANKRD13B,164,Hypertension|Hypothyroidism,
+rs12952244,17:40270081_A_G,KAT2A,165,Hypothyroidism,Albumin|Glucose|Oestradiol
+rs8068844,17:40571284_C_T,PTRF,165,Hypercholesterolemia,C-reactive protein|Gamma glutamyltransferase|IGF-1|LDL-direct|Triglycerides
+rs17608766,17:45013271_C_T,GOSR2,166,Hypertension,HbA1c|SBP|Urea
+rs4643373,17:47123423_C_T,IGF2BP1,167,Hypertension,BMI|C-reactive protein|Cystatin C|DBP|SBP|SHBG
+rs5820757,17:47417942_G_GA,ZNF652,167,Asthma|Hypercholesterolemia|Hypertension,DBP|HbA1c|SBP|SHBG|Testosterone|Triglycerides
+rs11655024,17:59232365_C_T,BCAS3,168,,Creatinine|Cystatin C|DBP|Phosphate|SBP|Total bilirubin|Urea
+rs11079536,17:62392403_G_T,PECAM1,169,,SBP
+rs2909217,17:66463985_C_T,WIPI1,170,,Alkaline phosphatase|Creatinine|Phosphate
+rs2410859,17:73841285_C_T,UNC13D,171,Hypercholesterolemia,Glucose|IGF-1|LDL-direct|Total bilirubin|Total protein
+rs9951447,18:20009691_C_T,CTAGE1,172,,
+rs9945890,18:46515916_G_T,SMAD7,173,Hypercholesterolemia,
+rs12965923,18:47213682_A_G,LIPG,174,,Apolipoprotein A|Cholesterol|HDL-cholesterol
+rs11663411,18:56960510_C_T,CPLX4,175,,
+rs476828,18:57852587_C_T,MC4R,176,Gout|Hypertension,Apolipoprotein A|BMI|C-reactive protein|Cystatin C|HDL-cholesterol|SHBG|Triglycerides|Urate
+rs116843064,19:8429323_A_G,ANGPTL4,177,Hypercholesterolemia,Apolipoprotein A|HDL-cholesterol|Triglycerides
+rs55997232,19:11188117_C_T,LDLR,178,Hypercholesterolemia,Apolipoprotein A|Apolipoprotein B|Cholesterol|LDL-direct
+rs10422256,19:11216617_A_G,LDLR,178,Hypercholesterolemia,Apolipoprotein B|Cholesterol|HbA1c|LDL-direct
+rs72658867,19:11231203_A_G,LDLR,178,Hypercholesterolemia,Apolipoprotein B|Cholesterol|LDL-direct|Triglycerides
+rs167479,19:11526765_G_T,RGL3,179,Hypercholesterolemia|Hypertension,DBP|SBP
+rs7246865,19:17219105_A_G,MYO9B,180,Hypertension,DBP|HbA1c|SBP
+rs10410487,19:17829608_C_T,MAP1S,181,,Gamma glutamyltransferase
+rs78030362,19:18575193_A_G,ELL,182,,Creatinine|Phosphate
+rs768453105,19:41790086_G_GTTATGGTA,HNRNPUL1,183,,Aspartate aminotransferase|Gamma glutamyltransferase|IGF-1
+rs11466359,19:41837615_A_G,TGFB1,183,,
+rs1800469,19:41860296_A_G,B9D2,183,,
+rs429358,19:45411941_C_T,APOE,184,Alzheimers or Dementia|Hypercholesterolemia,Alanine aminotransferase|Alkaline phosphatase|Apolipoprotein A|Apolipoprotein B|BMI|C-reactive protein|Cholesterol|Creatinine|Cystatin C|Gamma glutamyltransferase|HDL-cholesterol|LDL-direct|SHBG|Triglycerides|Urate|Urea
+rs7412,19:45412079_C_T,APOE,184,Hypercholesterolemia|Hypertension,Albumin|Alkaline phosphatase|Apolipoprotein A|Apolipoprotein B|BMI|C-reactive protein|Cholesterol|Creatinine|Cystatin C|Direct bilirubin|HDL-cholesterol|LDL-direct|Lipoprotein A|SBP|Triglycerides
+rs183657985,19:45742498_C_T,EXOC3L2,185,Hypertension,Alanine aminotransferase|Aspartate aminotransferase|BMI|C-reactive protein|Calcium|DBP|Gamma glutamyltransferase|SBP|SHBG|Total protein
+rs8108474,19:46301479_C_T,RSPH6A,186,Asthma|Cholelithiasis or Gallstones,SBP
+rs1132274,20:17596155_A_C,RRBP1,187,,Alkaline phosphatase|Apolipoprotein A|Aspartate aminotransferase|Vitamin D
+rs6088595,20:33358499_A_T,NCOA6,188,,Alanine aminotransferase|Apolipoprotein A|Creatinine|Urate
+rs17406518,20:33799176_A_C,MMP24,188,Venous thromboembolism,HbA1c
+rs2207132,20:39142516_A_G,MAFB,189,Hypercholesterolemia,Alanine aminotransferase|Alkaline phosphatase|Apolipoprotein B|C-reactive protein|Cholesterol|IGF-1|LDL-direct|Total bilirubin|Triglycerides
+rs6102343,20:39924279_A_G,ZHX3,190,Hypercholesterolemia,Apolipoprotein B|Cholesterol|Gamma glutamyltransferase|Glucose|IGF-1|LDL-direct|SHBG|Total bilirubin|Triglycerides
+rs8124182,20:44608901_A_G,ZNF335,191,,Apolipoprotein B
+rs2008614,20:47433150_C_T,PREX1,192,Hypertension,DBP|SBP
+rs6026739,20:57739469_A_T,ZNF831,193,Hypercholesterolemia|Hypertension,DBP|SBP
+rs28451064,21:35593827_A_G,NCRNA00310,194,,DBP
+rs149487184,21:35605863_C_T,NCRNA00310,194,,HbA1c|SBP
+rs71313931,22:19960184_C_G,ARVCF,195,Hypertension,SBP
+rs12484557,22:24555861_A_G,CABIN1,196,,Gamma glutamyltransferase
+rs5760309,22:24677831_G_T,SPECC1L,196,,Gamma glutamyltransferase|Glucose|HbA1c|Vitamin D
+rs6006426,22:30669883_A_G,OSM,197,,
+rs139012,22:43623972_A_G,SCUBE1,198,,
+rs667920,,,,,Apolipoprotein A|HDLC|LDLC|Triglycerides
+rs3936511,,,,,Apolipoprotein A|Apolipoprotein B|HDLC|LDLC
+rs7797644,,,,,Apolipoprotein A|HDLC
+rs9964304,,,,,Apolipoprotein A|HDLC
+rs16844401,,,,,Apolipoprotein B|LDLC|Triglycerides
+rs1591805,,,,,Apolipoprotein B|LDLC|Triglycerides
+rs3827066,,,,,Apolipoprotein B
+rs10512861,,,,,LDLC
+rs6997340,,,,,LDLC|Triglycerides
+rs4472337,,,,,Apolipoprotein A|HDLC
+rs2229357,,,,,Apolipoprotein A|Apolipoprotein B|HDLC|LDLC|Triglycerides
+rs585967,,,,,Apolipoprotein B
+rs2258287,,,,,Apolipoprotein B|LDLC
+rs1050362,,,,,Apolipoprotein B|LDLC
+rs3130683,,,,,LDLC|Triglycerides

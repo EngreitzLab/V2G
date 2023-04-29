@@ -1,0 +1,11 @@
+Celltypes	Cellgroup
+THP|Monocyte|monocyte|Mac|U937|dendritic	Mac
+Telo|telo|HUVEC|EPC|EC|endocardium|endothelial|ahy926|Endothelial|Endocardial|endothel|teloHAEC|TeloHAEC|Eahy|eahy|HUVEC|ndocard|EPC	EC
+vcm_fetal|acm_fetal|Day30_Cardiomyocytes|Day15_cardiomyocytes|cardiac_muscle_cell-ENCODE	CM
+smc|SMC|coronary_artery_smooth_muscle_cell-Miller2016	SMC
+fib	Fibroblasts
+hepatocyte|HepG2|liver	Hepatocytes
+Adipocyte|adipose	Adipose
+ventricle|F6|F8|F19|coronary_artery-ENCODE	HeartOrArteryTissue
+H1_BMP4_Derived_Mesendoderm_Cultured_Cells-Roadmap|hESC|telo|Telo|SMC|Day5_cardiacprogenitors|Day30_Cardiomyocytes|Day2_mesoderm|Day15_cardiomyocytes|Day0_ipsc|coronary_artery_smooth_muscle_cell-Miller2016	CellModels
+K562-Roadmap	K562
