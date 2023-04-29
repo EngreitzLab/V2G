@@ -1,0 +1,27 @@
+PLINK v1.90b6.21 64-bit (19 Oct 2020)
+Options in effect:
+  --bfile /oak/stanford/projects/genomics-refs/refs//ldscore/1000G_EUR_Phase3_plink/1000G.EUR.QC.9
+  --ld-snp rs635634
+  --ld-window 99999
+  --ld-window-kb 1
+  --ld-window-r2 1
+  --r2
+  --threads 1
+
+Hostname: sh03-04n24.int
+Working directory: /oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/preprocessing/Aragam
+Start time: Fri Apr 28 13:26:41 2023
+
+Random number seed: 1682713601
+257383 MB RAM detected; reserving 128691 MB for main workspace.
+438106 variants loaded from .bim file.
+489 people (0 males, 0 females, 489 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to plink.nosex .
+Using 1 thread.
+Before main variant filters, 489 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+438106 variants and 489 people pass filters and QC.
+Note: No phenotypes present.
+--r2 to plink.ld ... done.
+
+End time: Fri Apr 28 13:26:41 2023

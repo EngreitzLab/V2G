@@ -1,0 +1,23 @@
+chromosome	chromosome in hg19 coordinates (autosomes only)
+start	start position of variant in hg19 coordinates (0-indexed)
+end	end position of variant in hg19 coordinates (0-indexed)
+variant	unique variant identifier (chr:pos:ref:alt)
+rsid	rsID identifer
+allele1	reference allele in hg19 coordinates
+allele2	alternate allele in hg19 coordinates
+minorallele	minor allele in cohort
+cohort	GWAS cohort
+model_marginal	type of regression model used
+method	fine-mapping method used
+trait	abbreviation for phenotype used for genetic association tests
+region	region of the genome fine-mapping in hg19 coordinates
+maf	allele frequency of the minor allele in cohort
+beta_marginal	marginal association effect size from linear mixed model
+se_marginal	standard error on marginal association effect size from linear mixed model
+chisq_marginal	test statistic for marginal association
+pip	posterior probability of association from fine-mapping
+cs_id	ID of 95% credible set (-1 indicates that variant is not in a 95% CS)
+beta_posterior	posterior expectation of true effect size
+sd_posterior	posterior standard deviation of true effect size
+LD_HWE	indicator that the variant is in LD (R^2 > 0.6) with a variant that failed Hardy Weinberg equilibrium (p < 10^-12) that was also used in phasing based upon UK10K LD (http://www.nealelab.is/blog/2019/9/17/genotyped-snps-in-uk-biobank-failing-hardy-weinberg-equilibrium-test)
+LD_SV	indicator that the variant is in LD (R^2 > 0.8) with a common structural variant based upon European samples from gnomAD (Collins et al. bioRxiv 2019)
