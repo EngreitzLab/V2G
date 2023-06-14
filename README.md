@@ -4,11 +4,11 @@
 LD-expand Aragam and Harst variants and include fine-mapped variants from the publication.
 ```
 bash preprocessing/CAD_*/log.addRsid.0.9.sh
-Rscript preprocessing/CAD_*/MungeCredibleSets.R
+Rscript preprocessing/CAD_*/CreateVariantList.R
 ```
 Preprocess the fine-mapped UK biobank variants.
 ```
-Rscript preprocessing/UKBB_*/MungeCredibleSets.R
+Rscript preprocessing/UKBB_*/CreateVariantList.R
 ```
 
 ## Run V2G
