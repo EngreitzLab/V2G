@@ -116,7 +116,8 @@ loaded via a namespace (and not attached):
 ```
 ### Main output files
 - CAD_Aragam2021_cell2gene.txt: credible set to gene links. 
-- Credibleset_gene_variant_info.tsv: variants in the credible set contributing to the credible set to gene links. 
+- Credibleset_gene_variant_info.tsv: variants in the credible set contributing to the credible set to gene links.  
+
 - *relevant_variants.tsv: trait relevant variants in * cell type group.
 - PeaksOverlapFull.Peaks.tsv: all variant-overlapping peaks.
 - PeaksOverlapFull.tsv: all variants in peaks.
