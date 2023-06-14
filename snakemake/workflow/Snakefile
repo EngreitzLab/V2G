@@ -45,7 +45,7 @@ def getZeroIndexed(wildcards):
 def getExcludeVariants(wildcards):
 	return(str(variant_table.loc[wildcards.trait, "ExcludeVariants"]))
 ##########################################################
-rule MungeCredibleSet:
+rule CreateCredibleSets:
 	input:
 		fine_mapped_variants=getVariants,
 	params:
