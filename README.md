@@ -65,12 +65,12 @@ groupPeakOverlap:
 |:---------:|:---------:|:------:|
 |Trait      | The unique identifier of each trait. Required. |CAD_Aragam2021|
 |fine_mapped_table | The absolute path to the fine-mapped variant list. Required. |variant.list.txt|
-|LeadVariantCol | The lead variant column in the **fine-mapped variant list**. Required. |LeadVariant|
-|VariantCol | The variant ID column in the **fine-mapped variant list**. Required. |RSID|
-|ChrCol | The chromosome column in the **fine-mapped variant list**. Required. |chr|
-|PosCol | The variant position column in the **fine-mapped variant list**. Required. |position|
-|PCol |The p value column in the **fine-mapped variant list**. Required. |P.value|
-|PIPCol | The posterior probability column in the **fine-mapped variant list**. NA if the column does not exist |P.value|
+|LeadVariantCol | The lead variant column in the ***fine-mapped variant list***. Required. |LeadVariant|
+|VariantCol | The variant ID column in the ***fine-mapped variant list***. Required. |RSID|
+|ChrCol | The chromosome column in the ***fine-mapped variant list***. Required. |chr|
+|PosCol | The variant position column in the ***fine-mapped variant list***. Required. |position|
+|PCol |The p value column in the ***fine-mapped variant list***. Required. |P.value|
+|PIPCol | The posterior probability column in the ***fine-mapped variant list***. NA if the column does not exist |P.value|
 |Source | The source of the data |NA|
 |ZeroIndexed | Whether the variant position is zero indexed (F/T). Required. |F|
 |ExcludeVariants | IDs of variants to exclude from the analysis, if any. Required. |NA|
