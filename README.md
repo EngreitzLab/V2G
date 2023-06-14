@@ -4,15 +4,18 @@ The V2G pipeline links genetic variants to their target genes on a cell-type spe
 You can download ABC predictions in 131 cell types and tissues from [here](https://www.engreitzlab.org/resources), and the corresponding accessible peaks from [here](https://mitra.stanford.edu/engreitz/public/SchnitzlerKang2023/EnhancerList.minus150). 
 
 ## Preprocessing 
-Create a variant list for each trait. 
+Create a variant list for each trait.  This step is not required as long as the variant.list has the requreid columes specified in  **Variant table**.  
 *See **Variant table** section for required columns in the variant lists.*
 LD-expand Aragam and Harst variants and include fine-mapped variants from the publication.
 ```
+# LD-expand
 bash preprocessing/CAD_*/log.addRsid.0.9.sh
+# reformat
 Rscript preprocessing/CAD_*/CreateVariantList.R
 ```
 Preprocess the fine-mapped UK biobank variants.
 ```
+# reformat
 Rscript preprocessing/UKBB_*/CreateVariantList.R
 ```
 
