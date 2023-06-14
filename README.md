@@ -1,10 +1,10 @@
 # V2G
-The V2G pipeline links genetic variants to their target genes on a cell-type specific basis. The only input required is a table of variants of interest, formatted as described in "". 
+The V2G pipeline links genetic variants to their target genes on a cell-type specific basis. The only input required is a table of variants of interest, formatted as described in **Variant table** section.
 
 You can download ABC predictions in 131 cell types and tissues from [here](https://www.engreitzlab.org/resources), and the corresponding accessible peaks from [here](https://mitra.stanford.edu/engreitz/public/SchnitzlerKang2023/EnhancerList.minus150). 
 
 ## Preprocessing 
-Create a variant list for each trait.  This step is not required as long as the variant.list has the requreid columes specified in  **Variant table**.  
+Create a variant list for each trait.  This step is not required as long as the variant.list has the requreid columes specified in  **Variant table** section.  
 *See **Variant table** section for required columns in the variant lists.*
 LD-expand Aragam and Harst variants and include fine-mapped variants from the publication.
 ```
