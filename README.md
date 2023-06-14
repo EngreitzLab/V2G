@@ -118,15 +118,15 @@ loaded via a namespace (and not attached):
 - CAD_Aragam2021_cell2gene.txt: credible set to gene links. 
 - Credibleset_gene_variant_info.tsv: variants in the credible sets contributing to the credible set to gene links.  
 <br/>
-# additional output files
-- *relevant_variants.tsv: variants in enhancers or accessible regions of the * cell type group.
-- PeaksOverlapFull.Peaks.tsv: all variant-overlapping peaks.
-- PeaksOverlapFull.tsv: all variants in peaks.
-- CredibleSetPeakOverlapSummary.tsv: whether the credible sets overlapping with peaks in the cell type group. 
-- CredibleSetPeakOverlapSummary.with*peakinfo.tsv: * cell type group peaks containing variants. 
+# additional output files 
+- *relevant_variants.tsv: variants in enhancers or accessible regions of the * cell type group. 
+- PeaksOverlapFull.Peaks.tsv: all variant-overlapping peaks. 
+- PeaksOverlapFull.tsv: all variants in peaks. 
+- CredibleSetPeakOverlapSummary.tsv: whether the credible sets overlapping with peaks in the cell type group.  
+- CredibleSetPeakOverlapSummary.with*peakinfo.tsv: * cell type group peaks containing variants.  
 - CredibleSetPeakOverlapSummary.withpeakinfo.only*.tsv: * cell type group peaks containing variants that **only** overlap peaks in this cell type group. 
-- ABCOverlapFull.tsv: Vairant-overlapping ABC enhancers. 
+- ABCOverlapFull.tsv: Vairant-overlapping ABC enhancers.  
 - ABCOverlapFull.ranked.tsv: target genes of each credible set ranked by the maximum ABC scores of each gene in all cell types. 
 - ABCOverlap.ranked.*.grouped.tsv: target genes of each credible set ranked by the maximum ABC scores of each gene in all cells in * cell type group. 
-- ABCTopGeneTableWithCellCategories.tsv: cell type groups of top-ranked credible set-gene pairs (by ABC scores).
-- ABCVariantOverlapSummary.tsv: a summary table of the ABC interactions of each variant.  
+- ABCTopGeneTableWithCellCategories.tsv: cell type groups of top-ranked credible set-gene pairs (by ABC scores). 
+- ABCVariantOverlapSummary.tsv: a summary table of the ABC interactions of each variant. 
