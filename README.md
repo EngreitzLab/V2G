@@ -44,7 +44,7 @@ MungeCredibleSet:
 UbiquitouslyExpressedGenes: the absolute path to the bed file containing ubiquitously expressed genes. E.g., {path}/V2G/resources/UbiquitouslyExpressedGenes.txt
 ABCPRED: the absolute path to the ABC results for variant overlapping. E.g.{path}/V2G/resources/size_sorted_CombinedPredictions.AvgHiC.ABC0.015.minus150.txt.gz"
 
-ALLPEAKS: the absolute path to the directory containing [cell type-specific peaks] (https://mitra.stanford.edu/engreitz/public/SchnitzlerKang2023/EnhancerList.minus150). 
+ALLPEAKS: the absolute path to the directory containing [cell type-specific peaks](https://mitra.stanford.edu/engreitz/public/SchnitzlerKang2023/EnhancerList.minus150). 
 
 CelltypeTable: the absolute path to the table specifying cell type name patterns for cell type groups. The table is for catagorizing the cell types in ABCPRD and ALLPEAKS. E.g. {path}/V2G/resources/grouped_celltype_table.txt"
 
