@@ -24,7 +24,7 @@ Create the environment from the snakmake/envs/V2G.yaml file
 ```
 conda env create -f V2G.yaml
 ```
-Run snakemake after setting up the config file
+Run the snakemake pipeline after setting up the config file. Each step of the pipeline is explained in the snakefile.
 ```
 mkdir logs
 snakemake --conda-frontend conda --profile sherlock --configfile snakemake/config/config.yaml --rerun-incomplete --snakefile snakemake/workflow/Snakefile --cluster "sbatch -n 1 -J {rule} -o logs/{rule}_{wildcards}.qout -e logs/{rule}_{wildcards}.e --cpus-per-task {threads} --mem {resources.mem_gb}GB --time {resources.runtime_hr}:00:00"
