@@ -1,5 +1,5 @@
 # V2G
-The V2G pipeline links genetic variants to their target genes on a cell-type specific basis. The only input required is a table of variants of interest, formatted as described in [Variant table] (https://github.com/EngreitzLab/V2G/blob/main/README.md#variant-table) section.
+The V2G pipeline links genetic variants to their target genes on a cell-type specific basis. The only required input provided by the user is a tab-delimited table of variants for each trait, formatted as described in [Variant table] (https://github.com/EngreitzLab/V2G/blob/main/README.md#variant-table) section.
 
 You can download ABC predictions in 131 cell types and tissues from [here](https://www.engreitzlab.org/resources), and the corresponding accessible peaks from [here](https://mitra.stanford.edu/engreitz/public/SchnitzlerKang2023/EnhancerList.minus150). Additional customization is described in **Config** section.
 
@@ -64,16 +64,17 @@ groupPeakOverlap:
 ```
 
 ### Variant table
+This table provides information for the snakemake pipeline to operate on. The values of the fine_mapped_table column should link to the fine mapped variant table of each trait. 
 |ColumnName |Definition|Example|
 |:---------:|:---------:|:------:|
 |Trait      | The unique identifier of each trait. Required. |CAD_Aragam2021|
 |fine_mapped_table | The absolute path to the fine-mapped variant list. Required. |variant.list.txt|
-|LeadVariantCol | The lead variant column in the ***fine-mapped variant list***. Required. |LeadVariant|
-|VariantCol | The variant ID column in the ***fine-mapped variant list***. Required. |RSID|
-|ChrCol | The chromosome column in the ***fine-mapped variant list***. Required. |chr|
-|PosCol | The variant position column in the ***fine-mapped variant list***. Required. |position|
-|PCol |The p value column in the ***fine-mapped variant list***. Required. |P.value|
-|PIPCol | The posterior probability column in the ***fine-mapped variant list***. NA if the column does not exist |P.value|
+|LeadVariantCol | The lead variant column in the ***fine-mapped variant table***. Required. |LeadVariant|
+|VariantCol | The variant ID column in the ***fine-mapped variant table***. Required. |RSID|
+|ChrCol | The chromosome column in the ***fine-mapped variant table***. Required. |chr|
+|PosCol | The variant position column in the ***fine-mapped variant table***. Required. |position|
+|PCol |The p value column in the ***fine-mapped variant table***. Required. |P.value|
+|PIPCol | The posterior probability column in the ***fine-mapped variant table***. NA if the column does not exist |PIP|
 |Source | The source of the data |NA|
 |ZeroIndexed | Whether the variant position is zero indexed (F/T). Required. |F|
 |ExcludeVariants | IDs of variants to exclude from the analysis, if any. Required. |NA|  
