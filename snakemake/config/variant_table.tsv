@@ -1,4 +1,4 @@
 Trait	fine_mapped_table	LeadVariantCol	VariantCol	ChrCol	PosCol	PCol	PIPCol	Source	ZeroIndexed	ExcludeVariants
-CAD_Aragam2021	/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/preprocessing/CAD_Aragam2021/variant.list.txt	LeadVariant	RSID	chr	position	P.value	NA	Aragam2021	F	NA
-CAD_Harst2017	/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/preprocessing/CAD_Harst2017/variant.list.txt	LeadVariant	RSID	chr	position	P	NA	Harst2017	F	rs11838267,rs2074158,rs9964304,rs3827066,rs260020,rs1887318,rs590121,rs35879803
-UKBB_DBP	/oak/stanford/groups/engreitz/Users/rosaxma/2111_pipeline_output/ABC/make_pipeline/github_version/preprocessing/UKBB_DBP/variant.list.txt	LeadVariant	variant	chromosome	position	beta_marginal	pip	UKBB_DBP	F	NA
+CAD_Aragam2021	../../preprocessing/CAD_Aragam2021/variant.list.txt	LeadVariant	RSID	chr	position	P.value	NA	Aragam2021	F	NA
+CAD_Harst2017	../../preprocessing/CAD_Harst2017/variant.list.txt	LeadVariant	RSID	chr	position	P	NA	Harst2017	F	rs11838267,rs2074158,rs9964304,rs3827066,rs260020,rs1887318,rs590121,rs35879803
+UKBB_DBP	../../preprocessing/UKBB_DBP/variant.list.txt	LeadVariant	variant	chromosome	position	beta_marginal	pip	UKBB_DBP	F	NA
