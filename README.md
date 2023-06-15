@@ -1,7 +1,7 @@
 # V2G
 The V2G pipeline links genetic variants to their target genes on a cell-type specific basis. <ins>The only required input provided by the user is a tab-delimited table of variants for each trait, formatted as described in [Variant table](https://github.com/EngreitzLab/V2G/blob/main/README.md#variant-table) section <ins>.
 
-You can download ABC predictions in 131 cell types and tissues from [here](https://www.engreitzlab.org/resources), and the corresponding accessible peaks from [here](https://mitra.stanford.edu/engreitz/public/SchnitzlerKang2023/EnhancerList.minus150). Additional customization is described in **Config** section.
+You can download ABC predictions in 131 cell types and tissues from [here](https://www.engreitzlab.org/resources), and the corresponding accessible peaks from [here](https://mitra.stanford.edu/engreitz/public/SchnitzlerKang2023/EnhancerList.minus150). Additional customization is described in [Config](https://github.com/EngreitzLab/V2G/blob/main/README.md#config) section.
 
 ## Preprocessing 
 Create a variant list for each trait.  This step is not required as long as the variant.list has the requreid columes specified in [Variant table]( https://github.com/EngreitzLab/V2G/blob/main/README.md#variant-table) section.  
