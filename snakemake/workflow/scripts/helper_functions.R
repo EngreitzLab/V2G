@@ -73,7 +73,7 @@ annotateVariants <- function(df, variant.gr, promoters.gr, include.names=F) {
     df$CodingVariantGene <- NA
     keys <- unique(na.omit(codingVariants$GENEID))
     if (length(keys) > 0) {
-      symbols <- select(org.Hs.eg.db, keys=keys, keytype="ENTREZID",columns="SYMBOL")
+      symbols <- VariantAnnotation::select(org.Hs.eg.db, keys=keys, keytype="ENTREZID",columns="SYMBOL")
       df$CodingVariantGene[codingVariants$QUERYID] <- sapply(codingVariants$GENEID, function(id) {
         index <- which(symbols$ENTREZID == id)
         if (length(index) == 1) return(symbols$SYMBOL[index])
@@ -88,7 +88,7 @@ annotateVariants <- function(df, variant.gr, promoters.gr, include.names=F) {
     df$SpliceSiteVariantGene <- NA
     keys <- unique(na.omit(spliceVariants$GENEID))
     if (length(keys) > 0) {
-      symbols <- select(org.Hs.eg.db, keys=keys, keytype="ENTREZID", columns="SYMBOL")
+      symbols <- VariantAnnotation::select(org.Hs.eg.db, keys=keys, keytype="ENTREZID", columns="SYMBOL")
       df$SpliceSiteVariantGene[spliceVariants$QUERYID] <- sapply(spliceVariants$GENEID, function(id) {
         index <- which(symbols$ENTREZID == id)
         if (length(index) == 1) return(symbols$SYMBOL[index])
