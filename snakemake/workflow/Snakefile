@@ -44,9 +44,16 @@ def getZeroIndexed(wildcards):
 
 def getExcludeVariants(wildcards):
 	return(str(variant_table.loc[wildcards.trait, "ExcludeVariants"]))
+
+## Function to extract whether PIP information is included
+def hasPIP(wildcards):
+    # test if variant_table column PIP is NA in various form
+    return(str(variant_table.loc[wildcards.trait, "PIPCol"] != "NA" and variant_table.loc[wildcards.trait, "PIPCol"] != "None"))
+
+
 ##########################################################
 rule CreateCredibleSets:
-""" Reformat variant list and create a summary table of each credible set, including information such as whether the variants in the credible sets overlap a promoter, are coding variants or are splicing variants. """
+	""" Reformat variant list and create a summary table of each credible set, including information such as whether the variants in the credible sets overlap a promoter, are coding variants or are splicing variants. """
 	input:
 		fine_mapped_variants=getVariants,
 	params:
@@ -91,7 +98,7 @@ rule CreateCredibleSets:
 		"""
 
 rule create_locus_window:
-""" Create a +/- 2 million base pairs window centerted at the lead variant for each credible set. """
+	""" Create a +/- 2 million base pairs window centerted at the lead variant for each credible set. """
 	input:
 		variant_list=os.path.join(config["OutDir"], "{trait}", "variant.list.txt"),
 		cs_list=os.path.join(config["OutDir"], "{trait}", "all.cs.txt")
@@ -114,7 +121,7 @@ rule create_locus_window:
 		"""
 
 rule intersect_window_w_genes:
-""" Intersect the locus windows with gene promoters. """
+	""" Intersect the locus windows with gene promoters. """
 	input:
 		locus_window_table=os.path.join(config["OutDir"], "{trait}","intermediate_files", "{trait}_gwas_table_base.bed"),
 	params:
@@ -135,7 +142,7 @@ rule intersect_window_w_genes:
 		"""
 
 rule merge_locus_window_w_genes:
-""" Merge the genes overlapping locus window with their corresponding credible set information. Filter genes at each credible set to keep at least two genes on each side of the lead variants (4 in total); and include genes > +/- 500 kb away from the lead variants if there are < 2 genes on each side of the variant within the +/- 500kb window until there are at least 2 genes on each side of the lead variant. """
+	""" Merge the genes overlapping locus window with their corresponding credible set information. Filter genes at each credible set to keep at least two genes on each side of the lead variants (4 in total); and include genes > +/- 500 kb away from the lead variants if there are < 2 genes on each side of the variant within the +/- 500kb window until there are at least 2 genes on each side of the lead variant. """
 	input:
 		locus_window_table=os.path.join(config["OutDir"], "{trait}","intermediate_files", "{trait}_gwas_table_base.txt"),
 		gene_overlap_window=os.path.join(config["OutDir"], "{trait}","intermediate_files", "{trait}_gwas_table_base.sorted.gene_overlap.bed"),
@@ -161,7 +168,7 @@ rule merge_locus_window_w_genes:
 		"""
 
 rule intersectWithABC:
-""" Intersect variants with ABC enhancers"""
+	""" Intersect variants with ABC enhancers"""
 	input:
 		variants=os.path.join(config["OutDir"], "{trait}", "variant.list.txt")
 	output:
@@ -181,12 +188,12 @@ rule intersectWithABC:
   		sed 1d | \
   		bedtools sort -i stdin -g {params.hg19sizes} > {output.sorted_variants}
 
-		cat {params.header} > {output.ABC_overlap}
+		{{ printf 'chr\tstart\tend\tvariant\tPosteriorProb\tTrait\tCredibleSet\t'; zcat {params.abcPred} | head -1; }} > {output.ABC_overlap}
 		zcat {params.abcPred} | sed 1d | bedtools sort -faidx {params.hg19sizes} -i stdin |bedtools intersect -sorted -wa -wb -a {output.sorted_variants} -b stdin -g {params.hg19sizes} >> {output.ABC_overlap}
 		"""
 
 rule intersectWithPeaks:
-""" Intersect variants with cell-type specific peaks."""
+	""" Intersect variants with cell-type specific peaks."""
 	input:
 		sorted_variants=os.path.join(config["OutDir"], "{trait}", "intermediate_files", "Variants.sorted.bed"),
 	output:
@@ -213,7 +220,7 @@ rule intersectWithPeaks:
 		"""
 
 rule intersectWithCelltypes:
-""" Create summary tables of ABC enhancer-overlapping variants."""
+	""" Create summary tables of ABC enhancer-overlapping variants."""
 	input:
 		ABCOverlap=os.path.join(config["OutDir"], "{trait}", "ABCOverlapFull.tsv"), 
 		PeakOverlapFull=os.path.join(config["OutDir"], "{trait}", "PeaksOverlapFull.tsv"),
@@ -249,7 +256,7 @@ rule intersectWithCelltypes:
 		"""
 
 rule groupABCByCelltypes:
-""" Summarize  ABC enhancer-overlapping variants by cell-type group."""
+	""" Summarize  ABC enhancer-overlapping variants by cell-type group."""
 	input: 
 		ABC_overlap_ranked=os.path.join(config["OutDir"], "{trait}", "ABCOverlapFull.ranked.tsv")
 	output:
@@ -260,7 +267,8 @@ rule groupABCByCelltypes:
 		grouped_celltype_table=config["CelltypeTable"],
 		source=getSource,
 		codeDir=config["CodeDir"],
-		PIP=config["groupABCByCelltypes"]["PIP"]
+		PIP=config["groupABCByCelltypes"]["PIP"],
+		hasPIP=hasPIP,
 	resources:
 		mem_gb=16,
 		runtime_hr=3
@@ -273,11 +281,12 @@ rule groupABCByCelltypes:
 			--ranked_ABC_table {input.ABC_overlap_ranked} \
 			--source {params.source} \
 			--PIP {params.PIP} \
+			--hasPIP {params.hasPIP} \
 			--helperFunctions {params.helper_functions}
 		"""
 
 rule groupPeakOverlap:
-""" Summarize  peak-overlapping variants by cell-type group."""
+	""" Summarize  peak-overlapping variants by cell-type group."""
 	input: 
 		CredibleSet_peak_overlap_summary=os.path.join(config["OutDir"], "{trait}", "CredibleSetPeakOverlapSummary.tsv"),
 		PeaksOverlapFull_Peaks=os.path.join(config["OutDir"],"{trait}", "PeaksOverlapFull.Peaks.tsv"),
@@ -290,7 +299,8 @@ rule groupPeakOverlap:
 		grouped_celltype_tables=config["CelltypeTable"],
 		source=getSource,
 		codeDir=config["CodeDir"],
-		PIP=config["groupPeakOverlap"]["PIP"]
+		PIP=config["groupPeakOverlap"]["PIP"],
+		hasPIP=hasPIP,
 	resources:
 		mem_gb=16,
 		runtime_hr=3
@@ -304,10 +314,11 @@ rule groupPeakOverlap:
 			--cellGroup {wildcards.cellGroup} \
 			--source {params.source} \
 			--PIP {params.PIP} \
+			--hasPIP {params.hasPIP} \
 			--helperFunctions {params.helper_functions}
 		"""
 rule createABCtable:
-"""Create an information table summarizing the locations of the intermediate files for rule combinedOutputTables. """
+	"""Create an information table summarizing the locations of the intermediate files for rule combinedOutputTables. """
 	input:
 		credibleset_peakinfo=expand(os.path.join(config["OutDir"],"{{trait}}", "CredibleSetPeakOverlapSummary.with{cellGroup}peakinfo.tsv"),cellGroup=CellGroupsOfInterest),
 		credibleset_peakinfo_cellgroup_only=expand(os.path.join(config["OutDir"],"{{trait}}", "CredibleSetPeakOverlapSummary.withpeakinfo.only{cellGroup}.tsv"),cellGroup=CellGroupsOfInterest),
@@ -328,7 +339,7 @@ rule createABCtable:
 
 
 rule combineOutputTables:
-""" Combine intermediate tables to create the final credible set to gene table."""
+	""" Combine intermediate tables to create the final credible set to gene table."""
 	input:
 		base_df=os.path.join(config["OutDir"], "{trait}","intermediate_files", "{trait}_gwas_table_base_genes.txt"),
 		ABC_overlapping_df=os.path.join(config["OutDir"],"{trait}", "peak_ABC_overlapping_table.tsv"),
@@ -358,7 +369,7 @@ rule combineOutputTables:
 		"""
 
 rule getVariantInfo:
-""" combineOutputTables creates a table with credible set level information. getVariantInfo details the variants that contribute to the credible set-gene linking."""
+	""" combineOutputTables creates a table with credible set level information. getVariantInfo details the variants that contribute to the credible set-gene linking."""
 	input:
 		combined_table=os.path.join(config["OutDir"],"{trait}", "{trait}_cell2gene.txt"),
 		variant_list=os.path.join(config["OutDir"], "{trait}", "variant.list.txt"),

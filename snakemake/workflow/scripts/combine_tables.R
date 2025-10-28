@@ -17,6 +17,16 @@ option.list <- list(
 
 opt <- parse_args(OptionParser(option_list=option.list))
 
+## # Huh7
+## opt$CSbase_df <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/intermediate_files/ALT_gwas_table_base_genes.txt"
+## opt$ABCPeak_overlapping_table <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/peak_ABC_overlapping_table.tsv"
+## opt$UBQ_genes <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/resources/UbiquitouslyExpressedGenes.txt"
+## opt$LipidBloodAssociationTable <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/resources/lipid.level.csv"
+## opt$Cellgroups <- "Hepatocytes"
+## opt$Source <- "ALT"
+## opt$OutDir <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT"
+## opt$trait <- "ALT"
+
 # all the "MESDC1" are replaced with "TLNRD1"
 CS.base.df <- read.table(opt$CSbase_df, sep = '\t', header=TRUE,stringsAsFactors=FALSE)
 
@@ -58,9 +68,10 @@ for (row in 1:nrow(lipid.blood.association.core )){
 	if (length(traits[which(traits %in% blood.keys)])> 0){
 		blood.snps <- c(blood.snps, snp)
 	}
-
 }
+
 CS.base.df <- CS.base.df %>% mutate(LipidLevelsAssociated=ifelse(LeadVariant %in% lipid.snps, "TRUE", "FALSE")) %>% mutate(BloodPressureAssociated=ifelse(LeadVariant %in% blood.snps, "TRUE", "FALSE"))
+
 #############################################################
 counter=0
 for (cellgroup in cellgroups){
@@ -68,6 +79,7 @@ for (cellgroup in cellgroups){
 	#Peaks
 	peaks_df <- read.table(peak_ABC_overlapping_table[cellgroup,"Peaks"],header=TRUE, sep = '\t', stringsAsFactors=FALSE)
 	only_intersects_with_cellgroup_peaks_df <- read.table(peak_ABC_overlapping_table[cellgroup,"OnlyPeaks"],header=TRUE, sep = '\t', stringsAsFactors=FALSE)
+        
 	#Remove duplications caused by multiple variants in a credible sets.
 	if (("CellType" %in% colnames(peaks_df)) && (paste0("OnlyIntersectsWith", cellgroup, "Peak") %in% colnames(only_intersects_with_cellgroup_peaks_df))){
 		peaks.core <- peaks_df[c(cellgroup,"LeadVariant","PeakChr", "PeakStart","PeakEnd", "CellType")] %>% distinct() %>% rename(!!paste0("CellTypeOftheClosest",cellgroup,"Peak"):=CellType) %>% rename(!!paste0("IntersectsWith",cellgroup,"Peak") := !!cellgroup) 
@@ -76,14 +88,15 @@ for (cellgroup in cellgroups){
 		CS.base.df.peaks <- CS.base.df.peaks %>% rowwise() %>% mutate(!!sym(paste0("DistanceToNearest",cellgroup, "PeakWithVariant")):=!!sym(paste0(cellgroup, "_PeakCenter"))-as.numeric(TSS_position)) %>% mutate(!!sym(paste0("absDistanceToNearest",cellgroup,"PeakWithVariant")):=abs(!!sym(paste0("DistanceToNearest", cellgroup, "PeakWithVariant"))))
 		# Pick the gene with the shortest distance to nearest gene with cellgroup peak
 		# get the gene with the minimum distance
-		CS.base.df.peaks <- CS.base.df.peaks %>% group_by(Source,LeadVariant, gene) %>% filter(!!sym(paste0("absDistanceToNearest",cellgroup,"PeakWithVariant")) == min(!!sym(paste0("absDistanceToNearest",cellgroup,"PeakWithVariant")), na.rm=TRUE) |all(is.na(!!sym(paste0("absDistanceToNearest",cellgroup,"PeakWithVariant"))))) %>% ungroup()
+		CS.base.df.peaks <- CS.base.df.peaks %>% group_by(Source,LeadVariant, gene) %>% filter(!!sym(paste0("absDistanceToNearest",cellgroup,"PeakWithVariant")) == min(!!sym(paste0("absDistanceToNearest",cellgroup,"PeakWithVariant")), na.rm=TRUE) |all(is.na(!!sym(paste0("absDistanceToNearest",cellgroup,"PeakWithVariant"))))) %>% ungroup() ## absDistanceToNearestHepatocytesPeakWithVariant column with NA entries are removed
 		CS.base.df.peaks <- CS.base.df.peaks %>% group_by(Source,LeadVariant) %>% mutate(!!sym(paste0("RankOfDistanceTo", cellgroup, "PeakWithVariant")):=dense_rank(!!sym(paste0("absDistanceToNearest",cellgroup,"PeakWithVariant")))) %>% ungroup()
 
 		only_intersects_with_cellgroup_peaks.core <- only_intersects_with_cellgroup_peaks_df %>% select(c(LeadVariant,!!sym(paste0("OnlyIntersectsWith", cellgroup,"Peak")))) %>% filter(!is.na(!!sym(paste0("OnlyIntersectsWith", cellgroup,"Peak"))))
 
 		CS.base.df <- left_join(CS.base.df.peaks,only_intersects_with_cellgroup_peaks.core, by=c("LeadVariant"="LeadVariant")) %>% relocate(!!sym(paste0(cellgroup, "_PeakCenter")), .after=!!sym(paste0("CellTypeOftheClosest",cellgroup,"Peak"))) %>% relocate(!!sym(paste0("OnlyIntersectsWith", cellgroup,"Peak")),.after=!!sym(paste0("IntersectsWith",cellgroup,"Peak"))) 
 } 
-	#ABC
+
+        ##ABC
 	ABC_df <- read.table(peak_ABC_overlapping_table[cellgroup,"ABC"],header=TRUE, sep = '\t', stringsAsFactors=FALSE)
 	if (nrow(ABC_df)!=0){
 		ABC.df.core <- ABC_df %>% select(c(TargetGene, MaxABC, CellTypesInCredibleSet,LeadVariant, !!sym(paste0("MaxABC.",cellgroup,".only")), !!sym(paste0(cellgroup,"InCredibleSet")))) %>% rename(CellTypesWithEPInteractions=CellTypesInCredibleSet) %>% rename(!!paste0(cellgroup,"CellTypesWithEPInteractions"):= !!paste0(cellgroup,"InCredibleSet"))
@@ -94,7 +107,9 @@ for (cellgroup in cellgroups){
 		}
 		CS.base.df <- left_join(CS.base.df, ABC.df.core, by=c("gene" = "TargetGene", "LeadVariant" = "LeadVariant")) 
 		CS.base.df <- CS.base.df %>% select(-c(PeakChr,PeakStart,PeakEnd))
-		CS.base.df <- CS.base.df %>% mutate(!!sym(paste0(cellgroup, "CellTypesWithEPInteractions")):=ifelse(!!sym(paste0(cellgroup,"CellTypesWithEPInteractions"))=="",NA,!!sym(paste0(cellgroup,"CellTypesWithEPInteractions")))) %>% mutate(!!sym(paste0("MaxABC.",cellgroup,".only")):=ifelse(!!sym(paste0("MaxABC.",cellgroup,".only"))==0,NA,!!sym(paste0("MaxABC.",cellgroup,".only"))))
+		CS.base.df <- CS.base.df %>%
+                    mutate(!!sym(paste0(cellgroup, "CellTypesWithEPInteractions")):=ifelse(!!sym(paste0(cellgroup,"CellTypesWithEPInteractions"))=="",NA,!!sym(paste0(cellgroup,"CellTypesWithEPInteractions")))) %>%
+                    mutate(!!sym(paste0("MaxABC.",cellgroup,".only")):=ifelse(!!sym(paste0("MaxABC.",cellgroup,".only"))==0,NA,!!sym(paste0("MaxABC.",cellgroup,".only"))))
 	}
 }
 
@@ -109,14 +124,18 @@ if ("MaxABC" %in% colnames(final.df)){
 #Remove duplicates in CellTypes with EC Interactions
 	final.df <- final.df %>% distinct() %>%  group_by(LeadVariant,gene,Source) %>% mutate(CellTypesWithEPInteractions = as.character(paste0(unique(CellTypesWithEPInteractions),collapse="|"))) %>% mutate(CellTypesWithEPInteractions = as.character(paste0(unique(unlist(strsplit(CellTypesWithEPInteractions, split="|",fixed = TRUE))),collapse = "|"))) %>% ungroup()
 }
-#For each cell group: 
+
+##For each cell group: 
 for (cellgroup in cellgroups){
-	if ((paste0("MaxABC.",cellgroup,".only") %in% colnames(final.df)) && (paste0(cellgroup,"CellTypesWithEPInteractions") %in% colnames(final.df)) && (paste0("MaxABC.",cellgroup,".only") %in% colnames(final.df))){
+	if ((paste0("MaxABC.",cellgroup,".only") %in% colnames(final.df)) && (paste0(cellgroup,"CellTypesWithEPInteractions") %in% colnames(final.df))){
 		#sometimes a gene maybe associated with multiple ABC scores because the same credible sets from different sources contain different number of variants. the following steps are to collapse these entries into one entry. 
 		#this way it keeps the largest ABC score; The scores will be reranked at the end. 
 		final.df <- final.df %>% distinct() %>% group_by(LeadVariant,gene,Source) %>% mutate(!!sym(paste0("MaxABC.",cellgroup,".only")):=ifelse(all(is.na(!!sym(paste0("MaxABC.",cellgroup,".only")))),NA,max(!!sym(paste0("MaxABC.",cellgroup,".only")), na.rm=TRUE))) %>% ungroup()
 		#Again to collapse the cells with EP interactions. 
-		final.df <- final.df %>% distinct() %>% group_by(LeadVariant,gene,Source) %>% mutate(!!sym(paste0(cellgroup,"CellTypesWithEPInteractions")):= as.character(paste0(unique(!!sym(paste0(cellgroup,"CellTypesWithEPInteractions"))),collapse="|"))) %>% mutate(!!sym(paste0(cellgroup,"CellTypesWithEPInteractions")) := as.character(paste0(unique(unlist(strsplit(!!sym(paste0(cellgroup,"CellTypesWithEPInteractions")), split="|",fixed = TRUE))),collapse = "|"))) %>% ungroup()
+		final.df <- final.df %>% distinct() %>% group_by(LeadVariant,gene,Source) %>%
+                    mutate(!!sym(paste0(cellgroup,"CellTypesWithEPInteractions")):= as.character(paste0(unique(!!sym(paste0(cellgroup,"CellTypesWithEPInteractions"))),collapse="|"))) %>%
+                    mutate(!!sym(paste0(cellgroup,"CellTypesWithEPInteractions")) := as.character(paste0(unique(unlist(strsplit(!!sym(paste0(cellgroup,"CellTypesWithEPInteractions")), split="|",fixed = TRUE))),collapse = "|"))) %>%
+                    ungroup()
 		#For each credible set, re-rank per gene max abc scores.
 		final.df <- final.df %>% distinct() %>% group_by(LeadVariant,Source) %>% mutate(!!sym(paste0("MaxABC.Rank.",cellgroup,"Only")):=dense_rank(-!!sym(paste0("MaxABC.",cellgroup,".only")))) %>% ungroup() %>% relocate(!!sym(paste0("MaxABC.Rank.",cellgroup,"Only")), .after=!!sym(paste0("MaxABC.",cellgroup,".only")))
 	}

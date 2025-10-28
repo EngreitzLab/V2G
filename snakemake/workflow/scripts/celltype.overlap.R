@@ -15,9 +15,22 @@ option.list <- list(
 	)
 
 opt <- parse_args(OptionParser(option_list=option.list))
+
+## ## Huh7
+## opt$ABCOverlap <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/ABCOverlapFull.tsv"
+## opt$PeakOverlap <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/ABCVariantOverlapSummary.tsv"
+## opt$removeNonCoding <- F
+## opt$variantList <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/variant.list.txt"
+## opt$csList <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/all.cs.txt"
+## opt$grouped_celltype_table <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/resources/grouped_celltype_table.txt"
+## opt$outDir <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output"
+## opt$PIP <- 0
+## opt$helperFunctions <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/snakemake/workflow/scripts/helper_functions.R"
+
+
 source(opt$helperFunctions)
 setwd(opt$outDir)
-abc <- read.delim(opt$ABCOverlap)
+abc <- read.delim(opt$ABCOverlap) 
 if (opt$removeNonCoding){
 	abc <- abc %>% filter(!greplany(c("^LINC","-AS","^MIR","RNU","^LOC"),TargetGene))
 }else{
@@ -26,7 +39,8 @@ if (opt$removeNonCoding){
 variants <- read.delim(opt$variantList)
 all.cs <- read.delim(opt$csList)
 
-geneRanks <- abc %>% group_by(CredibleSet,TargetGene) %>% summarise(MaxABC=max(ABC.Score)) %>% as.data.frame()
+ABC.Score.column <- if("ABC.Score" %in% colnames(abc)) "ABC.Score" else "Score"
+geneRanks <- abc %>% group_by(CredibleSet,TargetGene) %>% summarise(MaxABC=max(get(ABC.Score.column))) %>% as.data.frame()
 geneRanks <- geneRanks %>% group_by(CredibleSet) %>% mutate(GeneRank=dense_rank(-MaxABC)) %>% as.data.frame()
 abc.ranked <- merge(abc, geneRanks)
 write.table(abc.ranked, file="ABCOverlapFull.ranked.tsv",row.names=F, col.names=T, sep='\t', quote=F)
@@ -44,7 +58,7 @@ tmp <- abc.ranked %>% group_by(variant,CredibleSet) %>%
   summarise(
   	AllCellTypes=paste0(CellType, collapse=','), 
   	TargetGenes=paste0(unique(TargetGene), collapse=','), 
-  	TopGene=unique(TargetGene[which.max(ABC.Score)])) %>% 
+  	TopGene=unique(TargetGene[which.max(get(ABC.Score.column))])) %>% 
   merge(all.cs) %>% arrange(CredibleSet) %>% unique() %>%  as.data.frame()
 
 write.table(tmp, file="ABCVariantOverlapSummary.tsv",row.names=F, col.names=T, sep='\t', quote=F)

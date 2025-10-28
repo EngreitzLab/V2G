@@ -15,11 +15,25 @@ option.list <- list(
 
 opt <- parse_args(OptionParser(option_list=option.list))
 
+## # Huh7
+## opt$CS2Gene <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/ALT_cell2gene.txt"
+## opt$variantList <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/variant.list.txt"
+## opt$peakOverlap <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/PeaksOverlapFull.tsv"
+## opt$ABCOverlap <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/ABCOverlapFull.tsv"
+## opt$Cellgroups <- "Hepatocytes"
+## opt$Outdir <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT"
+## opt$trait <- "ALT"
+
+
 cs2gene_df <- read.table(opt$CS2Gene, sep="\t", header=TRUE,stringsAsFactors=FALSE)
-variant_table <- read.table(opt$variant, sep="\t", header=TRUE, stringsAsFactors=FALSE)
+variant_table <- read.table(opt$variantList, sep="\t", header=TRUE, stringsAsFactors=FALSE)
 cellgroups=as.list(strsplit(opt$Cellgroups, ",")[[1]])
 peak_overlap_df <- read.table(opt$peakOverlap, sep="\t", header=TRUE, stringsAsFactors=FALSE) %>% select(variant,CredibleSet,CellType)
-ABC_overlap_df <- read.table(opt$ABCOverlap, sep="\t", header=TRUE, stringsAsFactors=FALSE) %>% select(variant,CredibleSet,CellType, ABC.Score, TargetGene)
+ABC_overlap_df <- read.table(opt$ABCOverlap, sep="\t", header=TRUE, stringsAsFactors=FALSE)
+ABC.Score.column <- if("ABC.Score" %in% colnames(ABC_overlap_df)) "ABC.Score" else "Score"
+ABC_overlap_df <- ABC_overlap_df%>% select(variant,CredibleSet,CellType, all_of(ABC.Score.column), TargetGene)
+colnames(ABC_overlap_df) <- c("variant", "CredibleSet", "CellType", "ABC.Score", "TargetGene")
+
 #############################################################
 #filter variants for (coding|splice)
 coding_df <- variant_table %>% filter(Coding) %>% select(variant,CredibleSet,Coding, CodingVariantGene) %>% mutate(codingVariant=ifelse(Coding, TRUE, FALSE)) %>% mutate_if(is.factor, as.character)
@@ -37,14 +51,13 @@ for (cellgroup in cellgroups){
 
 #############################################################
 #Variant in ABC
-df_ABC_interactions <- cs2gene_df %>% select(CredibleSet,gene, CellTypesWithEPInteractions) %>% separate_rows(CellTypesWithEPInteractions, sep="\\|", convert = TRUE) %>% as.data.frame() 
+df_ABC_interactions <- cs2gene_df %>% select(CredibleSet,gene, CellTypesWithEPInteractions) %>% separate_rows(CellTypesWithEPInteractions, sep="\\|", convert = TRUE) %>% as.data.frame()
 df_ABC_interactions <- merge(df_ABC_interactions, ABC_overlap_df, by.x=c("CredibleSet","CellTypesWithEPInteractions","gene"), by.y=c("CredibleSet", "CellType", "TargetGene")) %>% group_by(CredibleSet,gene) %>% mutate(ABC.rank = dense_rank(-ABC.Score)) %>% ungroup() %>% filter(ABC.rank==1) %>% select(-ABC.rank) %>% as.data.frame() %>% mutate(MaxABCVariant=TRUE)%>% group_by(CredibleSet) %>% mutate(MaxABC.Rank=dense_rank(-ABC.Score)) %>% rename(MaxABC.Score=ABC.Score) %>% ungroup() %>% as.data.frame() %>% mutate_if(is.factor, as.character)
-
 
 variant_ABC_df <- cs2gene_df %>% select(CredibleSet,gene) 
 for (cellgroup in cellgroups){
     celltype_col=paste0(cellgroup, "CellTypesWithEPInteractions")
-    celltype_specific_df_ABC_interactions <- cs2gene_df %>% select(CredibleSet, gene, !!sym(celltype_col)) %>% separate_rows(., !!sym(celltype_col), sep="\\|", convert = TRUE) 
+    celltype_specific_df_ABC_interactions <- cs2gene_df %>% select(CredibleSet, gene, !!sym(celltype_col)) %>% separate_rows(., !!sym(celltype_col), sep="\\|", convert = TRUE)
     celltype_specific_df_ABC_interactions <- merge(celltype_specific_df_ABC_interactions,ABC_overlap_df,by.x=c("CredibleSet",celltype_col, "gene"), by.y=c("CredibleSet", "CellType", "TargetGene")) %>% group_by(CredibleSet, gene) %>%  mutate(ABC.rank = dense_rank(-ABC.Score)) %>% ungroup() %>% filter(ABC.rank==1) %>% rename(!!paste0(cellgroup, ".ABC.Score"):=ABC.Score) %>% select(-ABC.rank) %>% as.data.frame()%>% mutate(!!sym(paste0("MacABC",cellgroup,"Variant")):=TRUE)
     variant_ABC_df <- variant_ABC_df %>% left_join(celltype_specific_df_ABC_interactions) %>% group_by(CredibleSet) %>% mutate(!!sym(paste0("MaxABC.Rank.", cellgroup, "Only")):=dense_rank(-!!sym(paste0(cellgroup, ".ABC.Score")))) %>% rename(!!paste0("MaxABC.Score.", cellgroup):=!!paste0(cellgroup, ".ABC.Score")) %>% ungroup() %>% as.data.frame() %>% mutate_if(is.factor, as.character)
 }
