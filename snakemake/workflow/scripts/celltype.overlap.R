@@ -16,18 +16,6 @@ option.list <- list(
 
 opt <- parse_args(OptionParser(option_list=option.list))
 
-## ## Huh7
-## opt$ABCOverlap <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/ABCOverlapFull.tsv"
-## opt$PeakOverlap <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/ABCVariantOverlapSummary.tsv"
-## opt$removeNonCoding <- F
-## opt$variantList <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/variant.list.txt"
-## opt$csList <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/all.cs.txt"
-## opt$grouped_celltype_table <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/resources/grouped_celltype_table.txt"
-## opt$outDir <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output"
-## opt$PIP <- 0
-## opt$helperFunctions <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/snakemake/workflow/scripts/helper_functions.R"
-
-
 source(opt$helperFunctions)
 setwd(opt$outDir)
 abc <- read.delim(opt$ABCOverlap) 

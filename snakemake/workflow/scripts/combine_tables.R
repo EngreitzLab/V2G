@@ -17,16 +17,6 @@ option.list <- list(
 
 opt <- parse_args(OptionParser(option_list=option.list))
 
-## # Huh7
-## opt$CSbase_df <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/intermediate_files/ALT_gwas_table_base_genes.txt"
-## opt$ABCPeak_overlapping_table <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/peak_ABC_overlapping_table.tsv"
-## opt$UBQ_genes <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/resources/UbiquitouslyExpressedGenes.txt"
-## opt$LipidBloodAssociationTable <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/resources/lipid.level.csv"
-## opt$Cellgroups <- "Hepatocytes"
-## opt$Source <- "ALT"
-## opt$OutDir <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT"
-## opt$trait <- "ALT"
-
 # all the "MESDC1" are replaced with "TLNRD1"
 CS.base.df <- read.table(opt$CSbase_df, sep = '\t', header=TRUE,stringsAsFactors=FALSE)
 

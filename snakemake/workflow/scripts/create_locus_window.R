@@ -11,10 +11,6 @@ option.list <- list(
 )
 opt <- parse_args(OptionParser(option_list=option.list))
 
-## opt$variants <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/variant.list.txt"
-## opt$cs <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/all.cs.txt"
-## opt$outdir <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/intermediate_files"
-## opt$trait <- "ALT"
 
 ############################################
 all.cs.df <- read.table(opt$cs, sep = '\t', header=TRUE,stringsAsFactors=FALSE)

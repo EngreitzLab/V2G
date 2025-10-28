@@ -15,14 +15,6 @@ option.list <- list(
 
 opt <- parse_args(OptionParser(option_list=option.list))
 
-## opt$outDir <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT"
-## opt$grouped_celltype_table <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/resources/grouped_celltype_table.txt"
-## opt$cellGroup <- "Hepatocytes"
-## opt$ranked_ABC_table <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/ABCOverlapFull.ranked.tsv"
-## opt$source <- "ALT"
-## opt$PIP <- 0
-## opt$helperFunctions <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/snakemake/workflow/scripts/helper_functions.R"
-## opt$hasPIP <- F
 
 setwd(opt$outDir)
 source(opt$helperFunctions)

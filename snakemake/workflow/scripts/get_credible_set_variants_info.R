@@ -15,15 +15,6 @@ option.list <- list(
 
 opt <- parse_args(OptionParser(option_list=option.list))
 
-## # Huh7
-## opt$CS2Gene <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/ALT_cell2gene.txt"
-## opt$variantList <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/variant.list.txt"
-## opt$peakOverlap <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/PeaksOverlapFull.tsv"
-## opt$ABCOverlap <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/ABCOverlapFull.tsv"
-## opt$Cellgroups <- "Hepatocytes"
-## opt$Outdir <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT"
-## opt$trait <- "ALT"
-
 
 cs2gene_df <- read.table(opt$CS2Gene, sep="\t", header=TRUE,stringsAsFactors=FALSE)
 variant_table <- read.table(opt$variantList, sep="\t", header=TRUE, stringsAsFactors=FALSE)

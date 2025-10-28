@@ -17,15 +17,6 @@ option.list <- list(
 
 opt <- parse_args(OptionParser(option_list=option.list))
 
-## opt$outDir <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT"
-## opt$cs_peak_overlap_summary <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/CredibleSetPeakOverlapSummary.tsv"
-## opt$PeaksOverlapFull_Peaks <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/output/ALT/PeaksOverlapFull.Peaks.tsv"
-## opt$grouped_celltype_table <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/resources/grouped_celltype_table.txt"
-## opt$cellGroup <- "Hepatocytes"
-## opt$source <- "ALT"
-## opt$PIP <- 0
-## opt$helperFunctions <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/snakemake/workflow/scripts/helper_functions.R"
-## opt$hasPIP <- F
 
 print("group.peakoverlap.result.R optparse list:")
 print(opt)

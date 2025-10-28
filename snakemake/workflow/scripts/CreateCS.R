@@ -21,23 +21,6 @@ option.list <- list(
 )
 opt <- parse_args(OptionParser(option_list=option.list))
 
-## # Huh7
-## opt$helperFunctions <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/snakemake/workflow/scripts/helper_functions.R"
-## opt$fineMappedVariants <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/250915_V2G/ld_expanded_with_rsid.tsv"
-## opt$genes <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/resources/RefSeqCurated.170308.bed.CollapsedGeneBounds.bed"
-## opt$promoters <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/resources/RefSeqCurated.170308.bed.CollapsedGeneBounds.TSS500bp.bed"
-## opt$trait <- "ALT"
-## opt$outdir <- "/oak/stanford/groups/engreitz/Users/kangh/V2G2P_Huh7/V2G/250915_V2G/output"
-## opt$leadVariantCol <- "leadSNP_RSID"
-## opt$variantCol <- "SNP_RSID"
-## opt$chrCol <- "SNP_chr"
-## opt$positionCol <- "SNP_position"
-## opt$PCol <- "r2"
-## opt$PIPCol <- "NA"
-## opt$Source <- "ALT"
-## opt$zeroIndexed <- F
-## opt$excludeVariants <- "NA"
-
 
 source(opt$helperFunctions)
 ##############################################################################
