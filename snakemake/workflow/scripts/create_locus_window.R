@@ -10,6 +10,8 @@ option.list <- list(
     make_option("--trait", type="character")
 )
 opt <- parse_args(OptionParser(option_list=option.list))
+
+
 ############################################
 all.cs.df <- read.table(opt$cs, sep = '\t', header=TRUE,stringsAsFactors=FALSE)
 variants.df <- read.table(opt$variants, sep = '\t', header=TRUE,stringsAsFactors=FALSE) %>% select(CredibleSet, LeadVariant, LeadVariantPos) %>% distinct()

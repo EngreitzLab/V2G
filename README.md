@@ -42,11 +42,11 @@ MungeCredibleSet:
         Promoters: the absolute path to the file containing promoter annotations. E.g.,{path}/V2G/resources/RefSeqCurated.170308.bed.CollapsedGeneBounds.TSS500bp.bed"
 
 UbiquitouslyExpressedGenes: the absolute path to the bed file containing ubiquitously expressed genes. E.g., {path}/V2G/resources/UbiquitouslyExpressedGenes.txt
-ABCPRED: the absolute path to the ABC results for variant overlapping. E.g.{path}/V2G/resources/size_sorted_CombinedPredictions.AvgHiC.ABC0.015.minus150.txt.gz"
+ABCPRED: the absolute path to the ABC results for variant overlapping. Please include all relevant cell types and stimulation conditions. E.g.{path}/V2G/resources/size_sorted_CombinedPredictions.AvgHiC.ABC0.015.minus150.txt.gz"
 
 ALLPEAKS: the absolute path to the directory containing [cell type-specific peaks](https://mitra.stanford.edu/engreitz/public/SchnitzlerKang2023/EnhancerList.minus150). 
 
-CelltypeTable: the absolute path to the table specifying cell type name patterns for cell type groups. The table is for catagorizing the cell types in ABCPRD and ALLPEAKS. E.g. {path}/V2G/resources/grouped_celltype_table.txt"
+CelltypeTable: the absolute path to the table specifying cell type name patterns for cell type groups. Please include names for all target cell types in this table. The table is for catagorizing the cell types in ABCPRD and ALLPEAKS. E.g. {path}/V2G/resources/grouped_celltype_table.txt"
 
 LipidBloodAssociationTable: the absolute path to the table containing variants associated with lipid level regulation. E.g., {path}/V2G/resources/lipid.level.csv"
 

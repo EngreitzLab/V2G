@@ -110,7 +110,7 @@ annotateVariants <- function(df, variant.gr, promoters.gr, include.names=F) {
         if (is.na(df$PromoterVariantGene[queryHits(ixn)[i]]))
           df$PromoterVariantGene[queryHits(ixn)[i]] <- gene
         else
-          df$PromoterVariantGene[queryHits(ixn)[i]] <- paste0(unique(c(gene, strsplit(df$PromoterVariantGene[queryHits(ixn)[i]],";"))), collapse=';')
+          df$PromoterVariantGene[queryHits(ixn)[i]] <- paste0(unique(c(gene, strsplit(df$PromoterVariantGene[queryHits(ixn)[i]],";") %>% unlist())), collapse=';') 
       }
     }
   }

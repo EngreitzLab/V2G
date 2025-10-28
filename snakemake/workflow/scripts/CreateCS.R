@@ -20,9 +20,11 @@ option.list <- list(
   make_option("--excludeVariants", type="character", help="Variant to exclude")
 )
 opt <- parse_args(OptionParser(option_list=option.list))
+
+
 source(opt$helperFunctions)
 ##############################################################################
-variants=read.table(opt$fineMappedVariants, header=T, stringsAsFactors=F)
+variants=read.table(opt$fineMappedVariants, header=T, stringsAsFactors=F, fill=T)
 ##############################################################################
 ## Load common data
 genes <- readBed(opt$genes)
